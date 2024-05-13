@@ -8,12 +8,12 @@ import Navigation from "./components/Navigation.vue";
     <Navigation />
   </header>
   <div class="container">
-    <nav>
+    <!-- <nav>
       <RouterLink to="/">Home</RouterLink>
       <RouterLink to="/about">About</RouterLink>
     </nav>
 
-    <RouterView />
+    <RouterView /> -->
   </div>
 </template>
 

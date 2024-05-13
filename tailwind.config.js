@@ -10,7 +10,11 @@ export default {
 module.exports = {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "main-color": "#6B98F2",
+      },
+    },
   },
   plugins: [],
 };

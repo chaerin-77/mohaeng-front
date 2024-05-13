@@ -1,12 +1,13 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
 import Navigation from "./components/Navigation.vue";
+import LoginView from "./views/LoginView.vue";
 </script>
 
 <template>
-  <header>
+  <!-- <header>
     <Navigation />
-  </header>
+  </header> -->
   <div class="container">
     <!-- <nav>
       <RouterLink to="/">Home</RouterLink>
@@ -15,6 +16,7 @@ import Navigation from "./components/Navigation.vue";
 
     <RouterView /> -->
   </div>
+  <LoginView />
 </template>
 
 <style scoped></style>

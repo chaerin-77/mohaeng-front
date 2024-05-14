@@ -1,22 +1,24 @@
 <script setup>
-import { RouterLink, RouterView } from "vue-router";
+import { RouterView, useRoute } from "vue-router";
+import { ref, watchEffect } from "vue";
 import Navigation from "./components/Navigation.vue";
-import LoginView from "./views/LoginView.vue";
+
+const showNavbar = ref(true);
+const route = useRoute();
+
+watchEffect(() => {
+  // 특정 페이지에 대한 meta 정보 확인
+  if (!route.meta.showNavbar) {
+    showNavbar.value = false; // 네비게이션 바를 숨김
+  }
+});
 </script>
 
 <template>
-  <!-- <header>
+  <div v-if="showNavbar">
     <Navigation />
-  </header> -->
-  <div class="container">
-    <!-- <nav>
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/about">About</RouterLink>
-    </nav>
-
-    <RouterView /> -->
   </div>
-  <LoginView />
+  <router-view></router-view>
 </template>
 
 <style scoped></style>

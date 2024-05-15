@@ -3,6 +3,7 @@ import MainView from "@/views/MainView.vue";
 import UserView from "@/views/UserView.vue";
 import Login from "@/components/intro/Login.vue";
 import Signup from "@/components/intro/Signup.vue";
+import Mypage from "@/components/user/Mypage.vue";
 
 import { storeToRefs } from "pinia";
 
@@ -15,6 +16,16 @@ const router = createRouter({
       path: "/",
       name: "main",
       component: MainView,
+      meta: {
+        showNavbar: true,
+      },
+      children: [
+        {
+          path: "mypage",
+          name: "mypage",
+          component: Mypage,
+        },
+      ],
     },
     {
       path: "/user",
@@ -39,26 +50,26 @@ const router = createRouter({
   ],
 });
 
-router.beforeEach(async (to, from) => {
-  if (to.name === "login" || to.name === "signup") {
-    return true;
-  }
+// router.beforeEach(async (to, from) => {
+//   if (to.name === "login" || to.name === "signup") {
+//     return true;
+//   }
 
-  const memberStore = useMemberStore();
-  const { userInfo, isValidToken } = storeToRefs(memberStore);
-  const { getUserInfo } = memberStore;
+//   const memberStore = useMemberStore();
+//   const { userInfo, isValidToken } = storeToRefs(memberStore);
+//   const { getUserInfo } = memberStore;
 
-  let token = sessionStorage.getItem("accessToken");
+//   let token = sessionStorage.getItem("accessToken");
 
-  if (userInfo.value != null && token) {
-    await getUserInfo(token);
-  }
+//   if (userInfo.value != null && token) {
+//     await getUserInfo(token);
+//   }
 
-  if (!isValidToken.value || userInfo.value === null) {
-    return { name: "login" };
-  } else {
-    return { name: "main" };
-  }
-});
+//   if (!isValidToken.value || userInfo.value === null) {
+//     return { name: "login" };
+//   } else {
+//     return { name: "main" };
+//   }
+// });
 
 export default router;

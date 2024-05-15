@@ -11,7 +11,7 @@ import DiaryMemory from "../components/diary/DiaryMemory.vue";
 
 import { storeToRefs } from "pinia";
 
-import { useMemberStore } from "@/stores/member";
+import { useAuthStore } from "@/stores/auth";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -79,26 +79,20 @@ const router = createRouter({
   ],
 });
 
-// router.beforeEach(async (to, from) => {
-//   if (to.name === "login" || to.name === "signup") {
-//     return true;
-//   }
+router.beforeEach((to, from, next) => {
+  window.scrollTo(0, 0);
+  if (to.name === "login" || to.name === "signup") {
+    next();
+    return;
+  }
+  const authStore = useAuthStore();
 
-//   const memberStore = useMemberStore();
-//   const { userInfo, isValidToken } = storeToRefs(memberStore);
-//   const { getUserInfo } = memberStore;
-
-//   let token = sessionStorage.getItem("accessToken");
-
-//   if (userInfo.value != null && token) {
-//     await getUserInfo(token);
-//   }
-
-//   if (!isValidToken.value || userInfo.value === null) {
-//     return { name: "login" };
-//   } else {
-//     return { name: "main" };
-//   }
-// });
+  if (!authStore.user) {
+    alert("로그인 해주세요.");
+    next({ name: "login" });
+    return;
+  }
+  next();
+});
 
 export default router;

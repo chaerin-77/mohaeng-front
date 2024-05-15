@@ -1,12 +1,35 @@
 <script setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
+const authStore = useAuthStore();
+const router = useRouter();
 
+/* 비밀번호 일치 여부 체크 */
 const password = ref("");
 const confirmPassword = ref("");
 const passwordMatch = ref(true);
 
 const checkPasswordMatch = () => {
   passwordMatch.value = password.value === confirmPassword.value;
+};
+
+const joinForm = ref({
+  id: "",
+  password: password,
+  name: "",
+  phone: "",
+});
+
+const join = async () => {
+  if (!confirm("이대로 가입하시겠습니까?")) return;
+  try {
+    await authStore.join(joinForm.value);
+    router.push("/");
+  } catch (error) {
+    console.error("에러:", error);
+    alert("가입 실패");
+  }
 };
 </script>
 
@@ -19,7 +42,7 @@ const checkPasswordMatch = () => {
         class="block w-30 justify-center"
       />
       <div class="grid col-span-full gap-x-6 gap-y-8">
-        <form>
+        <form @submit.prevent="join">
           <div class="mt-10 grid gap-x-6 gap-y-8">
             <div class="w-80">
               <label
@@ -32,6 +55,8 @@ const checkPasswordMatch = () => {
                   id="email"
                   name="email"
                   type="email"
+                  v-model.trim="joinForm.id"
+                  required
                   class="block w-full rounded-md border-2 border-main-color py-1.5 main-color placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -48,6 +73,7 @@ const checkPasswordMatch = () => {
                   name="password"
                   type="password"
                   v-model="password"
+                  required
                   @input="checkPasswordMatch"
                   class="block w-full rounded-md border-2 border-main-color py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -85,7 +111,8 @@ const checkPasswordMatch = () => {
                   id="name"
                   name="name"
                   type="name"
-                  autocomplete="name"
+                  v-model.trim="joinForm.name"
+                  required
                   class="block w-full rounded-md border-2 border-main-color py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -101,19 +128,19 @@ const checkPasswordMatch = () => {
                   id="phone"
                   name="phone"
                   type="phone"
-                  autocomplete="phone"
+                  v-model.trim="joinForm.phone"
+                  required
                   class="block w-full rounded-md border-2 border-main-color py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
           </div>
           <div class="mt-14 flex items-center justify-center gap-x-6">
-            <button
+            <input
               type="submit"
               class="rounded-xl bg-main-color px-12 py-3 text-md font-semibold text-white shadow-md hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ring-1 ring-inset ring-gray-300"
-            >
-              회원가입
-            </button>
+              value="회원가입"
+            />
           </div>
         </form>
       </div>

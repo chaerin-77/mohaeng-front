@@ -1,11 +1,11 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
-import { useMemberStore } from "@/stores/member";
+import { useAuthStore } from "@/stores/auth";
 
-const memberStore = useMemberStore();
-const { userLogout } = memberStore;
-const logout = () => {
-  userLogout();
+const authStore = useAuthStore();
+const { logout } = authStore;
+const userlogout = () => {
+  logout();
 };
 </script>
 
@@ -14,9 +14,9 @@ const logout = () => {
     <nav class="container mx-auto px-6 py-3">
       <div class="flex items-center justify-between">
         <div class="text-white font-bold text-xl">
-          <a href="#"
-            ><img src="/src/assets/logo.png" alt="logo" class="h-14"
-          /></a>
+          <router-link :to="{ name: 'main' }">
+            <img src="/src/assets/logo.png" alt="logo" class="h-14" />
+          </router-link>
         </div>
         <div class="hidden md:block">
           <ul class="flex items-center space-x-10">
@@ -36,7 +36,7 @@ const logout = () => {
             <li>
               <router-link
                 :to="{ name: 'login' }"
-                @click.prevent="logout"
+                @click.prevent="userlogout"
                 class="text-gray-600 font-semibold"
               >
                 <font-awesome-icon icon="right-from-bracket" /> 로그아웃

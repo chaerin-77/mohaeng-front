@@ -1,5 +1,9 @@
 <script setup>
-import { RouterView, RouterLink } from "vue-router";
+import { ref } from "vue";
+import { RouterView, RouterLink, useRoute } from "vue-router";
+
+const route = useRoute();
+const menu = ref("home");
 </script>
 
 <template>
@@ -67,23 +71,58 @@ import { RouterView, RouterLink } from "vue-router";
         </div>
         <!-- 다이어리 틀 부분 -->
         <div class="border-2 border-main-color p-5 rounded-xl grid">
-          <route-view></route-view>
+          <router-view></router-view>
         </div>
       </div>
       <div class="mt-20">
-        <div class="w-24 bg-main-color grid place-items-center mb-2 pt-2 pb-2">
-          <p class="text-white">HOME</p>
-        </div>
-        <div
-          class="w-24 border-2 border-main-color grid place-items-center mb-2 pt-2 pb-2"
+        <router-link
+          :to="{ name: 'diaryHome' }"
+          class="hover:no-underline hover:text-blue-800"
         >
-          <p class="text-main-color">PLAN</p>
-        </div>
-        <div
-          class="w-24 border-2 border-main-color grid place-items-center pt-2 pb-2"
+          <div
+            class="w-24 border-2 border-l-0 border-main-color grid place-items-center mb-2 pt-2 pb-2"
+            :class="{ 'bg-main-color': route.name === 'diaryHome' }"
+          >
+            <p
+              class="text-main-color"
+              :class="{ 'text-white': route.name === 'diaryHome' }"
+            >
+              HOME
+            </p>
+          </div>
+        </router-link>
+        <router-link
+          :to="{ name: 'diaryPlan' }"
+          class="hover:no-underline hover:text-blue-800"
         >
-          <p class="text-main-color">MEMORY</p>
-        </div>
+          <div
+            class="w-24 border-2 border-l-0 border-main-color grid place-items-center mb-2 pt-2 pb-2"
+            :class="{ 'bg-main-color': route.name === 'diaryPlan' }"
+          >
+            <p
+              class="text-main-color"
+              :class="{ 'text-white': route.name === 'diaryPlan' }"
+            >
+              PLAN
+            </p>
+          </div>
+        </router-link>
+        <router-link
+          :to="{ name: 'diaryMemory' }"
+          class="hover:no-underline hover:text-blue-800"
+        >
+          <div
+            class="w-24 border-2 border-l-0 border-main-color grid place-items-center pt-2 pb-2"
+            :class="{ 'bg-main-color': route.name === 'diaryMemory' }"
+          >
+            <p
+              class="text-main-color"
+              :class="{ 'text-white': route.name === 'diaryMemory' }"
+            >
+              MEMORY
+            </p>
+          </div>
+        </router-link>
       </div>
     </div>
   </div>

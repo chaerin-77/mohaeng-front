@@ -9,10 +9,8 @@ const route = useRoute();
 
 watchEffect(() => {
   // 특정 페이지에 대한 meta 정보 확인
-  if (!route.meta.showNavbar) {
-    showNavbar.value = false; // 네비게이션 바를 숨김
-  }
-  console.log(showNavbar.value);
+  console.log(route.meta.showNavbar);
+  showNavbar.value = route.meta.showNavbar; // 네비게이션 바를 숨김
 });
 </script>
 

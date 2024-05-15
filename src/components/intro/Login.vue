@@ -86,10 +86,10 @@ const login = async () => {
             </button>
           </div>
           <div class="mt-2 flex items-center justify-center gap-x-6">
-            <RouterLink
+            <router-link
               :to="{ name: 'signup' }"
               class="text-gray-500 text-sm hover:text-main-color hover:no-underline"
-              >회원가입</RouterLink
+              >회원가입</router-link
             >
           </div>
         </form>

@@ -4,6 +4,10 @@ import UserView from "@/views/UserView.vue";
 import Login from "@/components/intro/Login.vue";
 import Signup from "@/components/intro/Signup.vue";
 import Mypage from "@/components/user/Mypage.vue";
+import DiaryView from "@/views/DiaryView.vue";
+import DiaryHome from "@/components/diary/DiaryHome.vue";
+import DiaryPlan from "../components/diary/DiaryPlan.vue";
+import DiaryMemory from "../components/diary/DiaryMemory.vue";
 
 import { storeToRefs } from "pinia";
 
@@ -44,6 +48,31 @@ const router = createRouter({
           path: "signup",
           name: "signup",
           component: Signup,
+        },
+      ],
+    },
+    {
+      path: "/diary",
+      name: "diary",
+      component: DiaryView,
+      meta: {
+        showNavbar: true,
+      },
+      children: [
+        {
+          path: "home",
+          name: "diaryHome",
+          component: DiaryHome,
+        },
+        {
+          path: "plan",
+          name: "diaryPlan",
+          component: DiaryPlan,
+        },
+        {
+          path: "memory",
+          name: "diaryMemory",
+          component: DiaryMemory,
         },
       ],
     },

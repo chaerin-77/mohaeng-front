@@ -1,4 +1,9 @@
-<script setup></script>
+<script setup>
+// import { ref } from "vue";
+// import { storeToRefs } from "pinia";
+import { RouterLink } from "vue-router";
+// import { useMemberStore } from "@/stores/member";
+</script>
 
 <template>
   <div class="bg-main-color p-20">
@@ -48,7 +53,12 @@
         </p>
       </div>
       <div class="ml-20">
-        <p class="text-main-color font-semibold">다이어리 확인하기 ></p>
+        <RouterLink
+          :to="{ name: 'diaryHome' }"
+          class="text-main-color font-semibold hover:no-underline"
+        >
+          다이어리 확인하기 >
+        </RouterLink>
       </div>
     </div>
   </div>

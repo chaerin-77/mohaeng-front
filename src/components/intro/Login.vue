@@ -6,14 +6,14 @@ import { useAuthStore } from "@/stores/auth.js";
 const router = useRouter();
 const authStore = useAuthStore();
 
-// const loginForm = ref({
-//   userId: "",
-//   userPwd: "",
-// });
 const loginForm = ref({
   userId: "",
-  password: "",
+  userPwd: "",
 });
+// const loginForm = ref({
+//   userId: "",
+//   password: "",
+// });
 
 const login = async () => {
   try {
@@ -30,26 +30,33 @@ const login = async () => {
 </script>
 
 <template>
-  <div class="login-box">
-    <div class="container grid place-items-center mt-20">
+  <div class="absolute pt-24 pb-24 pl-36 pr-36 bg-white shadow-md">
+    <div class="container grid place-items-center">
       <img
         src="/src/assets/logo-text.png"
         alt=""
         class="block relative w-30 justify-center"
       />
-      <div class="grid col-span-full gap-x-6 gap-y-8">
+      <div class="grid gap-x-6 gap-y-8">
         <form @submit.prevent="login">
-          <div class="mb-3 justify-end">
-            <input class="form-check-input" type="checkbox" />
-            <label class="form-check-label" for="saveid"> 아이디저장 </label>
-          </div>
           <div class="mt-10 grid gap-x-6 gap-y-8">
             <div class="w-72">
-              <label
-                for="email"
-                class="block text-sm font-medium leading-6 text-gray-900"
-                >아이디</label
-              >
+              <div class="flex justify-between">
+                <label
+                  for="email"
+                  class="block text-sm font-medium leading-6 text-gray-900"
+                  >아이디</label
+                >
+                <div class="text-right">
+                  <input
+                    type="checkbox"
+                    id="saveid"
+                    class="text-main-color"
+                  /><label class="text-main-color ml-2 text-sm" for="saveid">
+                    아이디 저장</label
+                  >
+                </div>
+              </div>
               <div class="mt-2">
                 <input
                   id="email"
@@ -57,7 +64,7 @@ const login = async () => {
                   type="email"
                   v-model.trim="loginForm.userId"
                   required
-                  class="block w-full rounded-md border-2 border-main-color py-1.5 main-color placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  class="block w-full rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 main-color placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -72,10 +79,10 @@ const login = async () => {
                   id="password"
                   name="password"
                   type="password"
-                  v-model.trim="loginForm.password"
+                  v-model.trim="loginForm.userPwd"
                   required
                   @keyup.enter="login"
-                  class="block w-full rounded-md border-2 border-main-color py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  class="block w-full rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -100,12 +107,4 @@ const login = async () => {
   </div>
 </template>
 
-<style scoped>
-.login-box {
-  height: 75vh;
-  width: 80vh;
-  position: absolute;
-  background-color: white;
-  box-shadow: 4px 4px 20px gray;
-}
-</style>
+<style scoped></style>

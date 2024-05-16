@@ -81,17 +81,17 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   window.scrollTo(0, 0);
-  if (to.name === "login" || to.name === "signup") {
-    next();
-    return;
-  }
-  const authStore = useAuthStore();
+  // if (to.name === "login" || to.name === "signup") {
+  //   next();
+  //   return;
+  // }
+  // const authStore = useAuthStore();
 
-  if (!authStore.user) {
-    alert("로그인 해주세요.");
-    next({ name: "login" });
-    return;
-  }
+  // if (!authStore.user) {
+  //   alert("로그인 해주세요.");
+  //   next({ name: "login" });
+  //   return;
+  // }
   next();
 });
 

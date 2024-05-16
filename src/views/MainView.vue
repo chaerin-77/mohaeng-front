@@ -26,7 +26,7 @@ import { RouterLink } from "vue-router";
       </div>
       <div class="ml-10">
         <h1 class="text-white text-xl font-semibold mb-6">내 여행 모임</h1>
-        <div class="flex p-5 border-2 border-white w-[55rem] rounded-2xl">
+        <div class="flex p-5 border-2 border-white w-full rounded-2xl">
           <div class="text-center m-3">
             <div class="rounded-full border-2 border-white w-20 h-20"></div>
             <p class="text-white text-md mt-3">동기 모임</p>

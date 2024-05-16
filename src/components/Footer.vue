@@ -10,7 +10,7 @@
         <p class="text-white">사이트맵</p>
       </div>
       <div>
-        <p class="text-white">
+        <p class="text-white font-thin">
           (주)채린민경 본부 ㅣ 대전광역시 유성구 덕명동 124 ㅣ 042-820-7400 l
           대표이사 : 김민경 정채린
         </p>

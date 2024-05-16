@@ -10,10 +10,6 @@ const loginForm = ref({
   userId: "",
   userPwd: "",
 });
-// const loginForm = ref({
-//   userId: "",
-//   password: "",
-// });
 
 const login = async () => {
   try {

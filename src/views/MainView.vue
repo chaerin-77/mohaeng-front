@@ -1,8 +1,11 @@
 <script setup>
-// import { ref } from "vue";
-// import { storeToRefs } from "pinia";
+import { ref, computed } from "vue";
 import { RouterLink } from "vue-router";
-// import { useMemberStore } from "@/stores/member";
+import { useAuthStore } from "@/stores/auth";
+import MyDiary from "@/components/main/MyDiary.vue";
+
+const authStore = useAuthStore();
+const user = computed(() => authStore.user);
 </script>
 
 <template>
@@ -13,9 +16,11 @@ import { RouterLink } from "vue-router";
         <div class="bg-white rounded-2xl p-5 flex">
           <div class="bg-gray-500 h-40 w-32"></div>
           <div class="ml-10">
-            <p class="font-semibold text-lg text-gray-600">정채린</p>
-            <p class="text-md text-gray-600 mt-2">2001.05.10</p>
-            <p class="text-md text-gray-600 mt-5">여행은 항상 즐겁게~</p>
+            <p class="font-semibold text-lg text-gray-600">
+              {{ user.userName }}
+            </p>
+            <p class="text-md text-gray-600 mt-2">{{ user.birthday }}</p>
+            <p class="text-md text-gray-600 mt-5">{{ user.message }}</p>
           </div>
         </div>
         <div class="bg-gray-500 p-4 text-center rounded-xl">
@@ -30,35 +35,24 @@ import { RouterLink } from "vue-router";
             <p class="text-white text-md mt-3">동기 모임</p>
           </div>
           <div class="text-center m-3">
-            <div class="rounded-full bg-orange-300 w-20 h-20 pt-4">
-              <font-awesome-icon icon="plus" style="color: white" size="2xl" />
-            </div>
+            <RouterLink :to="{ name: 'invite' }">
+              <div
+                class="hover:shadow-xl rounded-full bg-orange-300 w-20 h-20 pt-4"
+              >
+                <font-awesome-icon
+                  icon="plus"
+                  style="color: white"
+                  size="2xl"
+                />
+              </div>
+            </RouterLink>
           </div>
         </div>
       </div>
     </div>
   </div>
   <div class="container pt-20">
-    <p class="text-gray-500 text-xl font-semibold mb-5">나의 다이어리</p>
-    <div class="flex p-5 border border-gray-500 rounded-xl shadow-md">
-      <div class="bg-gray-500 h-48 w-36"></div>
-      <div class="ml-10">
-        <p class="font-semibold text-lg text-gray-600">친구들과 광주 나들이</p>
-        <p class="text-md text-gray-600 mt-2">2024.05.08 ~ 2024.05.10</p>
-        <p class="text-md text-gray-600 mt-2">동기 모임</p>
-        <p class="text-md text-gray-600 mt-5">
-          멤버: 김민경, 고승희, 홍경현, 정채린
-        </p>
-      </div>
-      <div class="ml-20">
-        <RouterLink
-          :to="{ name: 'diaryHome' }"
-          class="text-main-color font-semibold hover:no-underline"
-        >
-          다이어리 확인하기 >
-        </RouterLink>
-      </div>
-    </div>
+    <MyDiary />
   </div>
 </template>
 

@@ -4,10 +4,11 @@ import UserView from "@/views/UserView.vue";
 import Login from "@/components/intro/Login.vue";
 import Signup from "@/components/intro/Signup.vue";
 import Mypage from "@/components/user/Mypage.vue";
+import InviteView from "@/views/InviteView.vue";
 import DiaryView from "@/views/DiaryView.vue";
-import DiaryHome from "@/components/diary/DiaryHome.vue";
-import DiaryPlan from "../components/diary/DiaryPlan.vue";
-import DiaryMemory from "../components/diary/DiaryMemory.vue";
+import DiaryHome from "@/components/diary/Home/DiaryHome.vue";
+import DiaryPlan from "../components/diary/Plan/DiaryPlan.vue";
+import DiaryMemory from "../components/diary/Memory/DiaryMemory.vue";
 
 import { storeToRefs } from "pinia";
 
@@ -22,6 +23,7 @@ const router = createRouter({
       component: MainView,
       meta: {
         showNavbar: true,
+        requiresAuth: true,
       },
       children: [
         {
@@ -33,10 +35,10 @@ const router = createRouter({
     },
     {
       path: "/user",
-      name: "user",
       component: UserView,
       meta: {
         showNavbar: false,
+        requiresAuth: false,
       },
       children: [
         {
@@ -52,11 +54,20 @@ const router = createRouter({
       ],
     },
     {
+      path: "/invite",
+      name: "invite",
+      component: InviteView,
+      meta: {
+        showNavbar: true,
+        requiresAuth: true,
+      },
+    },
+    {
       path: "/diary",
-      name: "diary",
       component: DiaryView,
       meta: {
         showNavbar: true,
+        requiresAuth: true,
       },
       children: [
         {
@@ -81,17 +92,15 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   window.scrollTo(0, 0);
-  // if (to.name === "login" || to.name === "signup") {
-  //   next();
-  //   return;
-  // }
-  // const authStore = useAuthStore();
 
-  // if (!authStore.user) {
-  //   alert("로그인 해주세요.");
-  //   next({ name: "login" });
-  //   return;
-  // }
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+  const authStore = useAuthStore();
+
+  if (requiresAuth && !authStore.user) {
+    alert("로그인 해주세요.");
+    next({ name: "login" });
+    return;
+  }
   next();
 });
 

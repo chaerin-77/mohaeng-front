@@ -1,9 +1,13 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { RouterView, RouterLink, useRoute } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
 
 const route = useRoute();
 const menu = ref("home");
+
+const authStore = useAuthStore();
+const user = computed(() => authStore.user);
 </script>
 
 <template>
@@ -22,8 +26,8 @@ const menu = ref("home");
           class="bg-main-color p-5 text-center rounded-xl grid place-items-center mb-5"
         >
           <div class="bg-gray-500 h-40 w-32"></div>
-          <p class="text-white mt-4 text-lg">정채린</p>
-          <p class="text-white mt-4 text-md font-light">여행은 늘 즐겁게~</p>
+          <p class="text-white mt-4 text-lg">{{ user.userName }}</p>
+          <p class="text-white mt-4 text-md font-light">{{ user.message }}</p>
           <div class="mt-20">
             <p class="text-white mb-3">다른 모임</p>
             <div class="flex">

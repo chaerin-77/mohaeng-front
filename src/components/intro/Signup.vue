@@ -53,7 +53,7 @@ const join = async () => {
                     id="email"
                     name="email"
                     type="email"
-                    v-model.trim="joinForm.id"
+                    v-model.trim="joinForm.userId"
                     required
                     class="block w-full rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 main-color placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
                   />
@@ -111,7 +111,7 @@ const join = async () => {
                     id="name"
                     name="name"
                     type="name"
-                    v-model.trim="joinForm.name"
+                    v-model.trim="joinForm.userName"
                     required
                     class="block w-full rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
                   />

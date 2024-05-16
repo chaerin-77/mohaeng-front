@@ -10,7 +10,7 @@ const menu = ref("home");
   <div class="container pt-14">
     <div class="flex">
       <!--왼쪽 사이드 바-->
-      <div class="text-center">
+      <div class="text-center w-56 mt-2">
         <div class="mb-10">
           <span class="text-gray-500">TODAY </span>
           <span class="text-red-500"> 57 </span>
@@ -19,7 +19,7 @@ const menu = ref("home");
         </div>
         <!-- 왼쪽 상단 내 프로필 -->
         <div
-          class="bg-main-color w-[15rem] p-5 text-center rounded-xl grid place-items-center mb-5"
+          class="bg-main-color p-5 text-center rounded-xl grid place-items-center mb-5"
         >
           <div class="bg-gray-500 h-40 w-32"></div>
           <p class="text-white mt-4 text-lg">정채린</p>
@@ -37,7 +37,7 @@ const menu = ref("home");
           </div>
         </div>
         <!-- 멤버 div -->
-        <div class="bg-main-color w-[15rem] p-5 rounded-xl grid">
+        <div class="bg-main-color p-5 rounded-xl">
           <p class="text-white text-lg mb-4">이 모임 멤버</p>
           <!-- member list -->
           <div class="flex">

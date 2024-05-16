@@ -6,6 +6,7 @@ import router from "./router";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@/assets/base.css";
+
 import { useKakao } from "vue3-kakao-maps/@utils";
 
 import { library } from "@fortawesome/fontawesome-svg-core";

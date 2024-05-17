@@ -16,7 +16,7 @@ const userlogout = () => {
 
 <template>
   <header class="bg-white shadow-sm">
-    <nav class="container mx-auto px-6 py-3">
+    <nav class="container mx-auto py-2">
       <div class="flex items-center justify-between">
         <div class="text-white font-bold text-xl">
           <RouterLink :to="{ name: 'main' }">

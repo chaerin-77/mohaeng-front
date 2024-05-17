@@ -1,12 +1,14 @@
 <script setup>
 import { ref, computed } from "vue";
 import { RouterView, RouterLink, useRoute } from "vue-router";
+import UpdateDiary from "@/components/diary/UpdateDiary.vue";
 import { useAuthStore } from "@/stores/auth";
 
 const route = useRoute();
 
 const authStore = useAuthStore();
 const user = computed(() => authStore.user);
+const showModal = ref(false);
 </script>
 
 <template>
@@ -40,8 +42,11 @@ const user = computed(() => authStore.user);
           </div>
         </div>
         <!-- 멤버 div -->
-        <div class="bg-main-color p-5 rounded-xl">
-          <p class="text-white text-lg mb-4">이 모임 멤버</p>
+        <div class="bg-main-color py-4 px-4 rounded-xl text-left">
+          <div class="flex justify-between">
+            <p class="text-white text-lg mb-4">모임 멤버</p>
+            <a href="" class="text-white underline text-sm mt-1">수정</a>
+          </div>
           <!-- member list -->
           <div class="flex">
             <div
@@ -53,23 +58,27 @@ const user = computed(() => authStore.user);
       </div>
       <!-- 가운데 다이어리 -->
       <div class="ml-10 w-full">
-        <div class="flex mb-10">
+        <div class="flex justify-between mb-10">
           <!-- title 부분 -->
-          <div class="text-2xl font-semibold mr-5">
-            <span>친구들과 부산 나들이 </span>
-            <span>다이어리</span>
+          <div class="mr-5">
+            <span class="text-2xl font-semibold"
+              >친구들과 부산 나들이 다이어리
+            </span>
+            <span class="text-xl font-medium text-gray-500 ml-5"
+              >6반 여은파</span
+            >
           </div>
           <!-- 날짜 부분 -->
-          <div class="flex">
+          <div class="flex mr-3">
             <div class="text-xl font-medium text-gray-500 mr-5">
-              <span>2024.05.08 </span>
-              <span> ~ </span>
-              <span> 2024.05.10</span>
+              <span>2024.05.08 ~ 2024.05.10</span>
             </div>
-            <font-awesome-icon
-              icon="pen-to-square"
-              class="text-main-color h-5"
-            />
+            <a href="#" @click="showModal = true">
+              <font-awesome-icon
+                icon="pen-to-square"
+                class="text-main-color hover:text-orange-300 h-5 mt-1"
+              />
+            </a>
           </div>
         </div>
         <!-- 다이어리 내용 -->
@@ -130,6 +139,7 @@ const user = computed(() => authStore.user);
       </div>
     </div>
   </div>
+  <UpdateDiary v-model="showModal" />
 </template>
 
 <style scoped></style>

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const attractionApi = axios.create({
+const groupApi = axios.create({
   baseURL: "http://192.168.206.61:9000/groups", // ssafy 컴퓨터
 });
 

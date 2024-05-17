@@ -1,26 +1,11 @@
 <script setup>
 import { ref } from "vue";
 import { RouterLink, useRouter } from "vue-router";
-import InviteMember from "./InviteMember.vue";
+import SearchMember from "./SearchMember.vue";
+import MemberList from "./MemberList.vue";
 import { useAuthStore } from "@/stores/auth";
 const authStore = useAuthStore();
 const router = useRouter();
-
-// const userList = ref([]);
-// const getUserList = async () => {
-//   await authStore.getUserList();
-//   userList.value = authStore.userList;
-// };
-// getUserList();
-
-// const word = ref("");
-// const filteredUsers = ref([]);
-// const findUser = (event) => {
-//   const searchWord = event.target.value.toLowerCase();
-//   filteredUsers.value = userList.value.filter((user) =>
-//     user.name.toLowerCase().includes(searchWord)
-//   );
-// };
 
 const joinForm = ref({
   userId: "",
@@ -44,8 +29,8 @@ const join = async () => {
 
 <template>
   <form>
-    <div class="flex p-5">
-      <div class="w-96">
+    <div class="flex py-5 justify-between">
+      <div class="w-1/3 px-5">
         <div class="mb-4">
           <label for="gname" class="block text-sm font-medium text-gray-900"
             >모임 명</label
@@ -111,26 +96,8 @@ const join = async () => {
           </div>
         </div>
       </div>
-      <div class="ml-32 w-full">
-        <p class="text-sm font-medium text-gray-900">모임 멤버 초대하기</p>
-        <!-- <InviteMember /> -->
-        <div class="flex">
-          <div class="mb-4 mt-2 w-1/2">
-            <input
-              id="gtitle"
-              name="gtitle"
-              type="text"
-              s
-              @input="findUser"
-              @keyup.enter="findUser"
-              v-model="word"
-              required
-              class="w-96 py-2.5 px-3 main-color placeholder:text-gray-400 bg-blue-100 rounded-md"
-              placeholder="모임에 초대할 친구 아이디 혹은 이메일 검색"
-            />
-          </div>
-        </div>
-      </div>
+      <SearchMember class="w-1/3 px-5" />
+      <MemberList class="w-1/3 px-5" />
     </div>
   </form>
 </template>

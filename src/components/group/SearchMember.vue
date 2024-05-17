@@ -9,7 +9,7 @@ const word = ref("");
 
 const findUser = debounce(() => {
   if (word.value.length > 0) {
-    groupStore.findUser(word);
+    groupStore.findUser(word.value);
   }
 }, 500);
 </script>
@@ -30,7 +30,7 @@ const findUser = debounce(() => {
           placeholder="모임에 초대할 친구 아이디 혹은 이메일 검색"
         />
         <button
-          @click="findUser"
+          @click.prevent="findUser"
           class="px-4 text-sm text-white bg-main-color rounded-md focus:outline-none hover:text-black"
         >
           검색

@@ -9,7 +9,7 @@ export const useGroupStore = defineStore("group", () => {
   const memberIntList = ref([]);
 
   const findUser = async (word) => {
-    const response = await authApi.get("/keyword", {
+    const response = await authApi.get("/search", {
       params: {
         keyword: word,
       },

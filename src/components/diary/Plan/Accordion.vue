@@ -16,12 +16,11 @@ const toggleAccordion = () => {
       :aria-expanded="isOpen"
       :aria-controls="`collapse${_uid}`"
     >
-      <slot name="title" />
       <svg
         class="w-3 transition-all duration-200 transform"
         :class="{
           'rotate-180': isOpen,
-          'rotate-0': !isOpen,
+          '-rotate-90': !isOpen,
         }"
         fill="none"
         stroke="currentColor"
@@ -36,6 +35,7 @@ const toggleAccordion = () => {
           stroke-linejoin="round"
         />
       </svg>
+      <slot name="title" />
     </button>
 
     <div v-show="isOpen" :id="`collapse${_uid}`">

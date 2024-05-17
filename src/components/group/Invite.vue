@@ -56,7 +56,7 @@ const join = async () => {
               name="gname"
               type="text"
               required
-              class="block w-full border-b-2 pl-3 pr-3 border-main-color py-1.5 main-color placeholder:text-gray-400 focus:bg-blue-100"
+              class="block w-full border-t-0 border-l-0 border-r-0 border-b-2 px-3 py-2 border-main-color main-color placeholder:text-gray-400 focus:bg-blue-100"
             />
           </div>
         </div>
@@ -70,7 +70,7 @@ const join = async () => {
               name="gtitle"
               type="text"
               required
-              class="block w-full border-b-2 pl-3 pr-3 border-main-color py-1.5 main-color placeholder:text-gray-400 focus:bg-blue-100"
+              class="block w-full border-t-0 border-l-0 border-r-0 border-b-2 px-3 py-2 border-main-color main-color placeholder:text-gray-400 focus:bg-blue-100"
             />
           </div>
         </div>
@@ -84,7 +84,7 @@ const join = async () => {
               name="gdate"
               type="date"
               required
-              class="block w-full border-b-2 pl-3 pr-3 border-main-color py-1.5 main-color placeholder:text-gray-400 focus:bg-blue-100"
+              class="block w-full border-t-0 border-l-0 border-r-0 border-b-2 px-3 py-2 border-main-color main-color placeholder:text-gray-400 focus:bg-blue-100"
             />
             <p>~</p>
             <input
@@ -92,7 +92,7 @@ const join = async () => {
               name="gdate"
               type="date"
               required
-              class="block w-full border-b-2 pl-3 pr-3 border-main-color py-1.5 main-color placeholder:text-gray-400 focus:bg-blue-100"
+              class="block w-full border-t-0 border-l-0 border-r-0 border-b-2 px-3 py-2 border-main-color main-color placeholder:text-gray-400 focus:bg-blue-100"
             />
           </div>
         </div>
@@ -106,7 +106,7 @@ const join = async () => {
               name="gfile"
               type="text"
               required
-              class="block w-full border-b-2 pl-3 pr-3 border-main-color py-1.5 main-color placeholder:text-gray-400 focus:bg-blue-100"
+              class="block w-full border-t-0 border-l-0 border-r-0 border-b-2 px-3 py-2 border-main-color main-color placeholder:text-gray-400 focus:bg-blue-100"
             />
           </div>
         </div>

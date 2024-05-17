@@ -6,6 +6,7 @@ import router from "./router";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@/assets/base.css";
+import "../node_modules/flowbite-vue/dist/index.css";
 
 import { useKakao } from "vue3-kakao-maps/@utils";
 

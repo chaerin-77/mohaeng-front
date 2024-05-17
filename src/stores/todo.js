@@ -7,10 +7,6 @@ export const useTodoStore = defineStore(
     const id = ref(0);
     const todos = ref([]);
 
-    const allTodosCount = computed(() => todos.value.length);
-    const completedTodosCount = computed(() => todos.value.filter((todo) => todo.completed).length);
-    const activeTodosCount = computed(() => todos.value.filter((todo) => !todo.completed).length);
-
     const addTodo = (title) => {
       todos.value.push({ id: id.value++, title, completed: false });
     };
@@ -28,9 +24,6 @@ export const useTodoStore = defineStore(
     return {
       id,
       todos,
-      allTodosCount,
-      completedTodosCount,
-      activeTodosCount,
       addTodo,
       changeTodoComplete,
       removeTodo,

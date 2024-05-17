@@ -1,7 +1,11 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
+import { ref } from "vue";
+import Alarm from "./user/Alarm.vue";
+
+const showModal = ref(false);
+
 const router = useRouter();
 const authStore = useAuthStore();
 const { logout } = authStore;
@@ -22,9 +26,9 @@ const userlogout = () => {
         <div class="hidden md:block">
           <ul class="flex items-center space-x-10">
             <li>
-              <a href="#" class="text-gray-600">
-                <font-awesome-icon icon="bell" class="mr-1" /> 알림</a
-              >
+              <a href="#" class="text-gray-600" @click="showModal = true">
+                <font-awesome-icon icon="bell" class="mr-1" /> 알림
+              </a>
             </li>
             <li>
               <RouterLink :to="{ name: 'mypage' }" class="text-gray-600">
@@ -46,6 +50,7 @@ const userlogout = () => {
       </div>
     </nav>
   </header>
+  <Alarm v-model="showModal" />
 </template>
 
 <style scoped></style>

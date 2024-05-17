@@ -4,7 +4,6 @@ import { RouterView, RouterLink, useRoute } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
 
 const route = useRoute();
-const menu = ref("home");
 
 const authStore = useAuthStore();
 const user = computed(() => authStore.user);
@@ -73,11 +72,12 @@ const user = computed(() => authStore.user);
             />
           </div>
         </div>
-        <!-- 다이어리 틀 부분 -->
+        <!-- 다이어리 내용 -->
         <div class="border-2 border-main-color p-5 rounded-xl grid">
           <router-view></router-view>
         </div>
       </div>
+      <!-- 오른쪽 navbar -->
       <div class="mt-20">
         <router-link
           :to="{ name: 'diaryHome' }"

@@ -3,6 +3,7 @@ import MainView from "@/views/MainView.vue";
 import UserView from "@/views/UserView.vue";
 import Login from "@/components/intro/Login.vue";
 import Signup from "@/components/intro/Signup.vue";
+import Alarm from "@/components/user/Alarm.vue";
 import Mypage from "@/components/user/Mypage.vue";
 import InviteView from "@/views/InviteView.vue";
 import DiaryView from "@/views/DiaryView.vue";

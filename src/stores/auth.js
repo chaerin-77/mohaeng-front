@@ -8,7 +8,6 @@ export const useAuthStore = defineStore(
   () => {
     const token = ref(null);
     const user = ref(null);
-    const userList = ref([]);
 
     const join = async (joinInfo) => {
       const response = await authApi.post("/join", joinInfo);
@@ -39,13 +38,7 @@ export const useAuthStore = defineStore(
       user.value = response.data;
     };
 
-    // 전체 유저 조회
-    const getUserList = async () => {
-      const response = await authApi.get("/search");
-      userList = response.data;
-    };
-
-    return { user, token, userList, getUserList, join, login, logout };
+    return { user, token, join, login, logout };
   },
   { persist: { storage: sessionStorage } }
 );

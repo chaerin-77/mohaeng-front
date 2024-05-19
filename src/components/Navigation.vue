@@ -31,7 +31,7 @@ const userlogout = () => {
               </a>
             </li>
             <li>
-              <RouterLink :to="{ name: 'mypage' }" class="text-gray-600">
+              <RouterLink :to="{ name: 'myinfo' }" class="text-gray-600">
                 <font-awesome-icon icon="user" class="mr-1" /> 마이페이지
               </RouterLink>
             </li>

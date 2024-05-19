@@ -15,7 +15,7 @@ const { removeMember } = groupStore;
           <font-awesome-icon
             icon="minus"
             class="mt-1 text-main-color"
-            @click="removeMember(user.id)"
+            @click="removeMember(user)"
           />
         </div>
       </div>

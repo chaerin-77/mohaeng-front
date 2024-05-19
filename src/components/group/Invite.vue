@@ -4,31 +4,33 @@ import { RouterLink, useRouter } from "vue-router";
 import SearchMember from "./SearchMember.vue";
 import MemberList from "./MemberList.vue";
 import { useAuthStore } from "@/stores/auth";
+import { useGroupStore } from "@/stores/group";
+const groupStore = useGroupStore();
 const authStore = useAuthStore();
 const router = useRouter();
 
-const joinForm = ref({
-  userId: "",
-  userPwd: "",
-  userName: "",
-  userPhone: "",
-  birthday: "",
+const groupForm = ref({
+  groupName: "",
+  groupTitle: "",
+  groupImg: "",
+  startDate: "",
+  endDate: "",
 });
 
-const join = async () => {
-  if (!confirm("이대로 가입하시겠습니까?")) return;
+const createGroup = async () => {
+  if (!confirm("이대로 모임을 생성하시겠습니까?")) return;
   try {
-    await authStore.join(joinForm.value);
+    await groupStore.createGroup(groupForm.value);
     router.push("/");
   } catch (error) {
     console.error("에러:", error);
-    alert("가입 실패");
+    alert("모임 생성 실패");
   }
 };
 </script>
 
 <template>
-  <form>
+  <form @submit.prevent="createGroup">
     <div class="flex py-5 justify-between">
       <div class="w-1/3 px-5">
         <div class="mb-4">
@@ -40,6 +42,7 @@ const join = async () => {
               id="gname"
               name="gname"
               type="text"
+              v-model.trim="groupForm.groupName"
               required
               class="block w-full border-t-0 border-l-0 border-r-0 border-b-2 px-3 py-2 border-main-color main-color placeholder:text-gray-400 focus:bg-blue-100"
             />
@@ -54,6 +57,7 @@ const join = async () => {
               id="gtitle"
               name="gtitle"
               type="text"
+              v-model.trim="groupForm.groupTitle"
               required
               class="block w-full border-t-0 border-l-0 border-r-0 border-b-2 px-3 py-2 border-main-color main-color placeholder:text-gray-400 focus:bg-blue-100"
             />
@@ -68,6 +72,7 @@ const join = async () => {
               id="startDate"
               name="gdate"
               type="date"
+              v-model.trim="groupForm.startDate"
               required
               class="block w-full border-t-0 border-l-0 border-r-0 border-b-2 px-3 py-2 border-main-color main-color placeholder:text-gray-400 focus:bg-blue-100"
             />
@@ -76,6 +81,7 @@ const join = async () => {
               id="endDate"
               name="gdate"
               type="date"
+              v-model.trim="groupForm.endDate"
               required
               class="block w-full border-t-0 border-l-0 border-r-0 border-b-2 px-3 py-2 border-main-color main-color placeholder:text-gray-400 focus:bg-blue-100"
             />
@@ -90,6 +96,7 @@ const join = async () => {
               id="gfile"
               name="gfile"
               type="text"
+              v-model.trim="groupForm.groupImg"
               required
               class="block w-full border-t-0 border-l-0 border-r-0 border-b-2 px-3 py-2 border-main-color main-color placeholder:text-gray-400 focus:bg-blue-100"
             />
@@ -98,6 +105,13 @@ const join = async () => {
       </div>
       <SearchMember class="w-1/3 px-5" />
       <MemberList class="w-1/3 px-5" />
+    </div>
+    <div class="mt-10 flex items-center justify-center gap-x-6">
+      <input
+        type="submit"
+        class="rounded-xl bg-orange-300 px-12 py-3 text-md font-semibold text-white shadow-md hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        value="모임 만들기"
+      />
     </div>
   </form>
 </template>

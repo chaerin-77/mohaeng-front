@@ -24,7 +24,7 @@ const findUser = debounce(() => {
           name="gtitle"
           type="text"
           @input="findUser"
-          @keyup.enter="findUser"
+          @keyup.enter="groupStore.findUser(word)"
           v-model="word"
           class="block w-80 py-2.5 px-3 main-color placeholder:text-gray-400 bg-blue-100 border-b-2 border-x-0 border-t-0 border-main-color"
           placeholder="모임에 초대할 친구 아이디 혹은 이메일 검색"
@@ -43,7 +43,7 @@ const findUser = debounce(() => {
           <font-awesome-icon
             icon="plus"
             class="mt-1 text-main-color"
-            @click="addMember(user.id)"
+            @click="addMember(user)"
           />
         </div>
       </div>

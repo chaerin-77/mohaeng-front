@@ -3,8 +3,9 @@ import MainView from "@/views/MainView.vue";
 import UserView from "@/views/UserView.vue";
 import Login from "@/components/intro/Login.vue";
 import Signup from "@/components/intro/Signup.vue";
-import Alarm from "@/components/user/Alarm.vue";
-import Mypage from "@/components/user/Mypage.vue";
+import MypageView from "@/views/MypageView.vue";
+import UpdateMyInfo from "@/components/user/UpdateMyInfo.vue";
+import UpdatePassword from "@/components/user/UpdatePassword.vue";
 import InviteView from "@/views/InviteView.vue";
 import DiaryView from "@/views/DiaryView.vue";
 import DiaryHome from "@/components/diary/Home/DiaryHome.vue";
@@ -26,11 +27,25 @@ const router = createRouter({
         showNavbar: true,
         requiresAuth: true,
       },
+    },
+    {
+      path: "/mypage",
+      name: "mypage",
+      component: MypageView,
+      meta: {
+        showNavbar: true,
+        requiresAuth: true,
+      },
       children: [
         {
-          path: "mypage",
-          name: "mypage",
-          component: Mypage,
+          path: "myinfo",
+          name: "myinfo",
+          component: UpdateMyInfo,
+        },
+        {
+          path: "password",
+          name: "password",
+          component: UpdatePassword,
         },
       ],
     },

@@ -3,8 +3,10 @@ import { ref, computed } from "vue";
 import { RouterLink } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
 import { useGroupStore } from "@/stores/group";
-
+import updateMsg from "@/components/main/updateMsg.vue";
 import MyDiary from "@/components/main/MyDiary.vue";
+
+const showModal = ref(false);
 
 const authStore = useAuthStore();
 const user = computed(() => authStore.user);
@@ -17,14 +19,21 @@ const groupList = computed(() => groupStore.groupList);
     <div class="container flex justify-between">
       <div class="w-3/5">
         <h1 class="text-white text-xl font-semibold mb-6">내 프로필</h1>
-        <div class="bg-white rounded-2xl p-5 flex">
+        <div class="bg-white rounded-2xl p-5 flex justify-between">
           <div class="bg-gray-500 h-36 w-28"></div>
-          <div class="ml-10">
+          <div class="w-2/3">
             <p class="font-semibold text-lg text-gray-600">
               {{ user.userName }}
             </p>
             <p class="text-md text-gray-600 mt-2">{{ user.birthday }}</p>
-            <p class="text-md text-gray-600 mt-5">{{ user.message }}</p>
+            <div class="flex mt-3 justify-between w-full">
+              <p class="text-md text-gray-600">{{ user.message }}</p>
+              <font-awesome-icon
+                icon="pencil"
+                @click="showModal = true"
+                class="hover:text-main-color"
+              />
+            </div>
           </div>
         </div>
         <div class="bg-gray-500 p-4 text-center rounded-xl">
@@ -67,6 +76,7 @@ const groupList = computed(() => groupStore.groupList);
       <MyDiary v-for="group in groupList" :key="group.groupId" :group="group" />
     </div>
   </div>
+  <updateMsg v-model="showModal" />
 </template>
 
 <style scoped></style>

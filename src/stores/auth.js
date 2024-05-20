@@ -51,7 +51,14 @@ export const useAuthStore = defineStore(
       await setUserInfo();
     };
 
-    return { user, token, join, login, logout, update, updatePwd };
+    const addMsg = async (content) => {
+      const response = await authApi.put("/pwd", pwdInfo, {
+        headers: { Authorization: `Bearer ${token.value}` },
+      });
+      await setUserInfo();
+    };
+
+    return { user, token, join, login, logout, update, updatePwd, addMsg };
   },
   { persist: { storage: localStorage } }
 );

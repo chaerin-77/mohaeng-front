@@ -2,10 +2,13 @@
 import { ref, computed } from "vue";
 import { RouterLink } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
+import { useGroupStore } from "@/stores/group";
 
 const authStore = useAuthStore();
 const user = computed(() => authStore.user);
+
 defineProps({ group: Object });
+const groupStore = useGroupStore();
 </script>
 
 <template>
@@ -23,7 +26,8 @@ defineProps({ group: Object });
     </div>
     <div class="ml-20">
       <RouterLink
-        :to="{ name: 'diaryHome', params: { group: group } }"
+        :to="{ name: 'diaryHome' }"
+        @click.native="groupStore.setCurGroup(group)"
         class="text-main-color font-semibold hover:no-underline"
       >
         다이어리 확인하기 >

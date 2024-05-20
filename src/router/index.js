@@ -14,6 +14,7 @@ import DiaryMemory from "../components/diary/Memory/DiaryMemory.vue";
 
 import { useAuthStore } from "@/stores/auth";
 import { useGroupStore } from "@/stores/group";
+import { useTodoStore } from "@/stores/todo";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -123,6 +124,7 @@ router.beforeEach(async (to, from, next) => {
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
   const authStore = useAuthStore();
   const groupStore = useGroupStore();
+  const todoStore = useTodoStore();
 
   if (requiresAuth && !authStore.user) {
     alert("로그인 해주세요.");
@@ -132,6 +134,10 @@ router.beforeEach(async (to, from, next) => {
 
   if (to.name === "main") {
     await groupStore.getGroupList(); // 메인 페이지로 이동할 때 실행할 함수
+  }
+
+  if (to.name === "diaryHome") {
+    await todoStore.getTodoList(groupStore.curgroup.groupId); // 다이어리 페이지로 이동할 때 실행할 함수
   }
 
   next();

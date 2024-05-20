@@ -19,11 +19,11 @@ const addTodo = () => {
   <div v-for="todo in todoStore.todos" :key="todo.id">
     <div
       class="flex hover:bg-gray-50 py-2 px-3 justify-between"
-      @click="changeTodoComplete(todo.id)"
+      @click="changeTodoComplete(todo)"
     >
       <div class="flex">
         <font-awesome-icon
-          v-if="todo.completed"
+          v-if="todo.isChecked"
           icon="square-check"
           class="w-5 h-5 mt-1"
         />
@@ -32,14 +32,14 @@ const addTodo = () => {
           icon="fa-regular fa-square"
           class="w-5 h-5 mt-1"
         />
-        <p :class="{ 'line-through': todo.completed }" class="pl-20 text-lg">
-          {{ todo.title }}
+        <p :class="{ 'line-through': todo.isChecked }" class="pl-20 text-lg">
+          {{ todo.content }}
         </p>
       </div>
       <font-awesome-icon
         icon="fa-regular fa-trash-can"
         class="text-red-400 w-5 h-5 mt-1 hover:text-gray-400"
-        @click="removeTodo(todo.id)"
+        @click="removeTodo(todo.todoId)"
       />
     </div>
   </div>

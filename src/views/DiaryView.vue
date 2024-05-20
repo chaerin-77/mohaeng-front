@@ -6,13 +6,12 @@ import { useAuthStore } from "@/stores/auth";
 import { useGroupStore } from "@/stores/group";
 
 const route = useRoute();
-// const group = route.params;
-// console.log(route.params);
 
 const authStore = useAuthStore();
 const user = computed(() => authStore.user);
 const groupStore = useGroupStore();
 const groupList = computed(() => groupStore.groupList);
+const group = computed(() => groupStore.curgroup);
 
 const showModal = ref(false);
 </script>
@@ -24,9 +23,9 @@ const showModal = ref(false);
       <div class="text-center w-56 mt-2">
         <div class="mb-10">
           <span class="text-gray-500">TODAY </span>
-          <span class="text-red-500"> 57 </span>
+          <span class="text-red-500"> {{ group.todayCnt }} </span>
           <span class="text-gray-500"> | TOTAL </span>
-          <span class="text-gray-500"> 200</span>
+          <span class="text-gray-500"> {{ group.totalCnt }}</span>
         </div>
         <!-- 왼쪽 상단 내 프로필 -->
         <div
@@ -76,17 +75,15 @@ const showModal = ref(false);
         <div class="flex justify-between mb-10">
           <!-- title 부분 -->
           <div class="mr-5">
-            <span class="text-2xl font-semibold"
-              >{{ $route.params.groupTitle }}
-            </span>
-            <span class="text-xl font-medium text-gray-500 ml-5"
-              >6반 여은파</span
-            >
+            <span class="text-2xl font-semibold">{{ group.groupTitle }} </span>
+            <span class="text-xl font-medium text-gray-500 ml-5">{{
+              group.groupName
+            }}</span>
           </div>
           <!-- 날짜 부분 -->
           <div class="flex mr-3">
             <div class="text-xl font-medium text-gray-500 mr-5">
-              <span>2024.05.08 ~ 2024.05.10</span>
+              <span>{{ group.startDate }} ~ {{ group.endDate }}</span>
             </div>
             <a href="#" @click="showModal = true">
               <font-awesome-icon

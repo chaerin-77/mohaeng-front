@@ -32,7 +32,7 @@ const update = async () => {
   </div>
   <div class="grid gap-x-6 gap-y-8 place-items-center">
     <form @submit.prevent="update">
-      <div class="mt-10 mr-5">
+      <div class="mt-10">
         <div class="mb-4 flex place-items-center">
           <label
             for="email"
@@ -50,8 +50,6 @@ const update = async () => {
             />
           </div>
         </div>
-      </div>
-      <div class="mt-10">
         <div class="mb-4 flex place-items-center">
           <label for="name" class="mr-5 block text-sm font-medium text-gray-900"
             >이름</label

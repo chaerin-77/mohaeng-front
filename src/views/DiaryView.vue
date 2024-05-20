@@ -2,6 +2,7 @@
 import { ref, computed } from "vue";
 import { RouterView, RouterLink, useRoute } from "vue-router";
 import UpdateDiary from "@/components/diary/UpdateDiary.vue";
+import UpdateMember from "@/components/diary/UpdateMember.vue";
 import { useAuthStore } from "@/stores/auth";
 import { useGroupStore } from "@/stores/group";
 
@@ -14,7 +15,8 @@ const groupList = computed(() => groupStore.groupList);
 const group = computed(() => groupStore.curgroup);
 groupStore.getMemberInfo(groupStore.curgroup);
 
-const showModal = ref(false);
+const showModal1 = ref(false);
+const showModal2 = ref(false);
 </script>
 
 <template>
@@ -60,7 +62,12 @@ const showModal = ref(false);
         <div class="bg-main-color py-4 px-4 rounded-xl text-left">
           <div class="flex justify-between">
             <p class="text-white text-lg mb-4">모임 멤버</p>
-            <a href="" class="text-white underline text-sm mt-1">수정</a>
+            <a
+              href="#"
+              @click="showModal2 = true"
+              class="text-white underline text-sm mt-1"
+              >수정</a
+            >
           </div>
           <!-- member list -->
           <div v-for="member in groupStore.curgroupInfo" class="flex mb-2">
@@ -86,7 +93,7 @@ const showModal = ref(false);
             <div class="text-xl font-medium text-gray-500 mr-5">
               <span>{{ group.startDate }} ~ {{ group.endDate }}</span>
             </div>
-            <a href="#" @click="showModal = true">
+            <a href="#" @click="showModal1 = true">
               <font-awesome-icon
                 icon="pen-to-square"
                 class="text-main-color hover:text-orange-300 h-5 mt-1"
@@ -152,7 +159,8 @@ const showModal = ref(false);
       </div>
     </div>
   </div>
-  <UpdateDiary v-model="showModal" />
+  <UpdateDiary v-model="showModal1" />
+  <UpdateMember v-model="showModal2" />
 </template>
 
 <style scoped></style>

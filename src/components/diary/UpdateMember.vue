@@ -45,7 +45,7 @@ onMounted(() => {
   });
 });
 
-// 공지 등록 부분
+// 멤버 수정 부분
 import { useNoticeStore } from "@/stores/notice";
 const noticeStore = useNoticeStore();
 const content = ref("");

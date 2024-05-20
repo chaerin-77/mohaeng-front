@@ -21,19 +21,20 @@ export const useGroupStore = defineStore(
           keyword: word,
         },
       });
-
       // memberList에 없는 사용자만 userList에 추가
-      const filteredUsers = response.data.filter(
+      const filteredUsers = ref([]);
+      filteredUsers.value = response.data.filter(
         (user) =>
-          !memberList.value.some((member) => member.userId === user.userId)
+          !memberList.value.some((member) => member.userId !== user.userId)
       );
 
       // 나 자신을 검색하지 않도록
-      // filteredUsers.value = filteredUsers.value.filter(
-      //   (user) => user.id !== authStore.user.id
-      // );
+      filteredUsers.value = filteredUsers.value.filter(
+        (user) => user.id !== authStore.user.id
+      );
+      console.log("filteredUser: ", filteredUsers.value);
 
-      userList.value = filteredUsers;
+      userList.value = filteredUsers.value;
     };
 
     const addMember = (user) => {

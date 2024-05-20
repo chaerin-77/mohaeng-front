@@ -13,7 +13,7 @@ groupStore.getMemberInfo(props.group);
 </script>
 
 <template>
-  <div class="flex mb-3 p-5 border border-gray-500 rounded-xl shadow-md">
+  <div class="flex mb-3 p-5 border border-gray-500 rounded-xl shadow-md w-3/7">
     <div class="bg-gray-500 h-48 w-36"></div>
     <div class="ml-10">
       <p class="font-semibold text-lg text-gray-600">{{ group.groupTitle }}</p>

@@ -18,7 +18,7 @@ const groupList = computed(() => groupStore.groupList);
       <div class="w-3/5">
         <h1 class="text-white text-xl font-semibold mb-6">내 프로필</h1>
         <div class="bg-white rounded-2xl p-5 flex">
-          <div class="bg-gray-500 h-40 w-32"></div>
+          <div class="bg-gray-500 h-36 w-28"></div>
           <div class="ml-10">
             <p class="font-semibold text-lg text-gray-600">
               {{ user.userName }}
@@ -35,16 +35,16 @@ const groupList = computed(() => groupStore.groupList);
       </div>
       <div class="ml-10 w-full">
         <h1 class="text-white text-xl font-semibold mb-6">내 여행 모임</h1>
-        <div class="flex p-5 border-2 border-white rounded-2xl">
+        <div class="flex p-5 border-2 border-white rounded-2xl flex-wrap">
           <div
             v-for="group in groupList"
             :key="group.groupId"
-            class="text-center m-3"
+            class="text-center mr-3"
           >
             <div class="rounded-full border-2 border-white w-20 h-20"></div>
             <p class="text-white text-md mt-3">{{ group.groupName }}</p>
           </div>
-          <div class="text-center m-3">
+          <div class="text-center">
             <RouterLink :to="{ name: 'invite' }">
               <div
                 class="hover:shadow-xl rounded-full bg-orange-300 w-20 h-20 pt-4"
@@ -61,9 +61,11 @@ const groupList = computed(() => groupStore.groupList);
       </div>
     </div>
   </div>
-  <div class="container pt-20">
+  <div class="container pt-20 flex-wrap">
     <p class="text-gray-500 text-xl font-semibold mb-5">나의 다이어리</p>
-    <MyDiary v-for="group in groupList" :key="group.groupId" :group="group" />
+    <div class="flex justify-between">
+      <MyDiary v-for="group in groupList" :key="group.groupId" :group="group" />
+    </div>
   </div>
 </template>
 

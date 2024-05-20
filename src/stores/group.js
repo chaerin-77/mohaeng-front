@@ -89,8 +89,11 @@ export const useGroupStore = defineStore(
       curgroupInfo.value = response.data;
     };
 
-    const setCurGroup = (group) => {
-      curgroup.value = group;
+    const setCurGroup = async (group) => {
+      const response = await groupApi.get("", {
+        params: { groupId: group.groupId },
+      });
+      curgroup.value = response.data;
     };
 
     const update = async (updateInfo) => {
@@ -99,8 +102,6 @@ export const useGroupStore = defineStore(
       });
       setCurGroup(updateInfo);
     };
-
-    const calcCnt = async (groupId) => {};
 
     return {
       userList,

@@ -30,7 +30,7 @@ const showModal = ref(false);
         </div>
         <!-- 왼쪽 상단 내 프로필 -->
         <div
-          class="bg-main-color p-4 text-center rounded-xl grid place-items-center mb-5"
+          class="bg-main-color p-4 text-center rounded-xl grid place-items-center mb-5 w-52"
         >
           <div class="bg-gray-500 h-40 w-32"></div>
           <p class="text-white mt-4 text-lg">{{ user.userName }}</p>

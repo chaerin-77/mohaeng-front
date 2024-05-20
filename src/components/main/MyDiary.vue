@@ -7,8 +7,9 @@ import { useGroupStore } from "@/stores/group";
 const authStore = useAuthStore();
 const user = computed(() => authStore.user);
 
-defineProps({ group: Object });
+const props = defineProps({ group: Object });
 const groupStore = useGroupStore();
+groupStore.getMemberInfo(props.group);
 </script>
 
 <template>
@@ -20,8 +21,15 @@ const groupStore = useGroupStore();
         {{ group.startDate }} ~ {{ group.endDate }}
       </p>
       <p class="text-md text-gray-600 mt-2">{{ group.groupName }}</p>
-      <p class="text-md text-gray-600 mt-5">
-        멤버: 김민경, 고승희, 홍경현, 정채린
+      <p class="text-md text-gray-600 mt-5 flex">
+        멤버:
+        <span
+          v-for="member in groupStore.curgroupInfo"
+          :key="member.id"
+          class="ml-2"
+        >
+          {{ member.userName }}
+        </span>
       </p>
     </div>
     <div class="ml-20">

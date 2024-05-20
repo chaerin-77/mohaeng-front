@@ -29,6 +29,7 @@ export const useAuthStore = defineStore(
       //토큰 정보 및 유저 정보 삭제
       token.value = null;
       user.value = null;
+      window.localStorage.clear();
     };
 
     const setUserInfo = async () => {
@@ -40,5 +41,5 @@ export const useAuthStore = defineStore(
 
     return { user, token, join, login, logout };
   },
-  { persist: { storage: sessionStorage } }
+  { persist: { storage: localStorage } }
 );

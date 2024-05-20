@@ -12,6 +12,7 @@ const user = computed(() => authStore.user);
 const groupStore = useGroupStore();
 const groupList = computed(() => groupStore.groupList);
 const group = computed(() => groupStore.curgroup);
+groupStore.getMemberInfo(groupStore.curgroup);
 
 const showModal = ref(false);
 </script>
@@ -62,11 +63,11 @@ const showModal = ref(false);
             <a href="" class="text-white underline text-sm mt-1">수정</a>
           </div>
           <!-- member list -->
-          <div class="flex">
+          <div v-for="member in groupStore.curgroupInfo" class="flex mb-2">
             <div
               class="rounded-full border-2 border-white w-12 h-12 mr-2"
             ></div>
-            <p class="text-white m-2 text-md">김민경</p>
+            <p class="text-white m-2 text-md">{{ member.userName }}</p>
           </div>
         </div>
       </div>

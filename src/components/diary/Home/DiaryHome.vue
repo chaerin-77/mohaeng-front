@@ -3,8 +3,17 @@ import DiaryHomeNotice from "./DiaryHomeNotice.vue";
 import DiaryHomeToDo from "./DiaryHomeToDo.vue";
 import DiaryHomeTalk from "./DiaryHomeTalk.vue";
 import NoticeAdd from "./NoticeAdd.vue";
+import { useChatStore } from "@/stores/chat";
 import { ref } from "vue";
 const showModal = ref(false);
+const content = ref("");
+const chatStore = useChatStore();
+const addChat = () => {
+  if (content.value.length > 0) {
+    chatStore.addChat(content.value);
+    content.value = "";
+  }
+};
 </script>
 
 <template>
@@ -34,15 +43,15 @@ const showModal = ref(false);
         <input
           type="text"
           class="form-control mr-3 rounded-md"
-          v-model="title"
-          @keypress.enter="addTodo"
+          v-model="content"
+          @keypress.enter="addChat()"
           placeholder="talk 작성 ..."
         />
         <button
           class="bg-main-color text-white px-3 rounded-md hover:bg-gray-400"
           type="button"
-          @keyup.enter="addTodo"
-          @click="addTodo"
+          @keyup.enter="addChat()"
+          @click="addChat()"
         >
           <font-awesome-icon
             icon="fa-regular fa-paper-plane"

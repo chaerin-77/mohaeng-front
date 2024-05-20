@@ -13,6 +13,7 @@ export const useGroupStore = defineStore(
     const memberIntList = ref([]);
     const groupList = ref([]);
     const curgroup = ref({});
+    const curgroupInfo = ref([]);
 
     const findUser = async (word) => {
       const response = await authApi.get("/search", {
@@ -79,6 +80,15 @@ export const useGroupStore = defineStore(
       console.log(groupList.value);
     };
 
+    const getMemberInfo = async (group) => {
+      const response = await groupApi.get("/users", {
+        params: {
+          groupId: group.groupId,
+        },
+      });
+      curgroupInfo.value = response.data;
+    };
+
     const setCurGroup = (group) => {
       curgroup.value = group;
     };
@@ -90,12 +100,14 @@ export const useGroupStore = defineStore(
       memberList,
       groupList,
       curgroup,
+      curgroupInfo,
       findUser,
       addMember,
       removeMember,
       createGroup,
       getGroupList,
       setCurGroup,
+      getMemberInfo,
     };
   },
   { persist: { storage: sessionStorage } }

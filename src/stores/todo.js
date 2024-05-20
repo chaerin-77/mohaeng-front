@@ -2,7 +2,7 @@ import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 import todoApi from "@/api/todoApi";
 import { useAuthStore } from "@/stores/auth";
-import { useGroupStore } from "./group";
+import { useGroupStore } from "@/stores/group";
 
 export const useTodoStore = defineStore(
   "todo",
@@ -10,7 +10,7 @@ export const useTodoStore = defineStore(
     const id = ref(0);
     const authStore = useAuthStore();
     const groupStore = useGroupStore();
-    const todos = ref([]);
+    const todoList = ref([]);
 
     const getTodoList = async () => {
       const response = await todoApi.get("", {
@@ -18,7 +18,8 @@ export const useTodoStore = defineStore(
           groupId: groupStore.curgroup.groupId,
         },
       });
-      todos.value = response.data;
+      todoList.value = response.data;
+      console.log("todoList: ", todoList.value);
     };
 
     const addTodo = async (title) => {
@@ -29,19 +30,16 @@ export const useTodoStore = defineStore(
       getTodoList();
     };
 
-    const changeTodoComplete = async (todo) => {
-      todo.isChecked = !todo.isChecked;
+    const changeTodoComplete = async (idx) => {
+      const todo = todoList.value[idx];
+      todo.checked = !todo.checked;
       const response = await todoApi.put("", todo, {
         headers: { Authorization: `Bearer ${authStore.token}` },
       });
       getTodoList();
-      // todos.value = todos.value.map((todo) =>
-      //   todo.todoId === id ? { ...todo, isChecked: !todo.isChecked } : todo
-      // );
     };
 
     const removeTodo = async (id) => {
-      // todos.value = todos.value.filter((todo) => todo.id !== id);
       const response = await todoApi.delete(
         "",
         {
@@ -58,13 +56,12 @@ export const useTodoStore = defineStore(
 
     return {
       id,
-      todos,
+      todoList,
       getTodoList,
       addTodo,
       changeTodoComplete,
       removeTodo,
     };
   },
-  { persist: { storage: localStorage } }
-  // { persist: { storage: sessionStorage } }
+  { persist: { storage: sessionStorage } }
 );

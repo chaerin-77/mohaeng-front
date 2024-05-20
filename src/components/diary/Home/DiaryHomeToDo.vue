@@ -16,14 +16,14 @@ const addTodo = () => {
 </script>
 
 <template>
-  <div v-for="todo in todoStore.todos" :key="todo.id">
+  <div v-for="(todo, idx) in todoStore.todoList" :key="todo.id">
     <div
       class="flex hover:bg-gray-50 py-2 px-3 justify-between"
-      @click="changeTodoComplete(todo)"
+      @click="changeTodoComplete(idx)"
     >
       <div class="flex">
         <font-awesome-icon
-          v-if="todo.isChecked"
+          v-if="todo.checked"
           icon="square-check"
           class="w-5 h-5 mt-1"
         />
@@ -32,7 +32,7 @@ const addTodo = () => {
           icon="fa-regular fa-square"
           class="w-5 h-5 mt-1"
         />
-        <p :class="{ 'line-through': todo.isChecked }" class="pl-20 text-lg">
+        <p :class="{ 'line-through': todo.checked }" class="pl-20 text-lg">
           {{ todo.content }}
         </p>
       </div>

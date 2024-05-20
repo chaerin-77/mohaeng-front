@@ -46,12 +46,22 @@ onMounted(() => {
 });
 
 // 공지 등록 부분
-import { useAuthStore } from "@/stores/auth";
-const authStore = useAuthStore();
-const notice = ref({
-  groupId: "",
-  content: "",
-});
+import { useNoticeStore } from "@/stores/notice";
+const noticeStore = useNoticeStore();
+const content = ref("");
+
+const addNotice = async () => {
+  if (!confirm("이대로 등록하시겠습니까?")) return;
+  if (content.value.length > 0) {
+    try {
+      await noticeStore.addNotice(content.value);
+      close();
+    } catch (error) {
+      console.error("에러:", error);
+      alert("등록 실패");
+    }
+  }
+};
 
 // const join = async () => {
 //   if (!confirm("이대로 가입하시겠습니까?")) return;
@@ -88,7 +98,7 @@ const notice = ref({
           <div class="mt-2">
             <input
               type="text"
-              v-model="notice.content"
+              v-model="content"
               required
               class="block w-96 h-52 rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 main-color placeholder:text-gray-400"
             />
@@ -96,7 +106,7 @@ const notice = ref({
         </div>
         <div class="text-center mt-5">
           <button
-            @click="close"
+            @click="addNotice()"
             class="px-4 py-2 text-sm text-white bg-main-color rounded-md focus:outline-none hover:text-black"
           >
             등록하기

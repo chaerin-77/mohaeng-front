@@ -52,6 +52,7 @@ export const useAuthStore = defineStore(
     };
 
     const addMsg = async (content) => {
+      const obj = { id: user.id };
       const response = await authApi.put("/pwd", pwdInfo, {
         headers: { Authorization: `Bearer ${token.value}` },
       });

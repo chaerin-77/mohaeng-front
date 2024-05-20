@@ -37,11 +37,11 @@ const showModal = ref(false);
           <p class="text-white mt-4 text-md font-light">{{ user.message }}</p>
           <div class="mt-20">
             <p class="text-white mb-3">다른 모임</p>
-            <div class="flex">
+            <div class="flex flex-wrap w-full gap-x-2 gap-y-2">
               <div
                 v-for="othergroup in groupList"
                 :key="othergroup.groupId"
-                class="rounded-full border-2 border-white w-12 h-12 mr-2"
+                class="rounded-full border-2 border-white w-12 h-12"
               ></div>
               <RouterLink :to="{ name: 'invite' }"
                 ><div

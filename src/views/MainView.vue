@@ -70,10 +70,15 @@ const groupList = computed(() => groupStore.groupList);
       </div>
     </div>
   </div>
-  <div class="container pt-20 flex-wrap">
+  <div class="container pt-20">
     <p class="text-gray-500 text-xl font-semibold mb-5">나의 다이어리</p>
-    <div class="flex justify-between">
-      <MyDiary v-for="group in groupList" :key="group.groupId" :group="group" />
+    <div class="flex justify-between flex-wrap gap-y-5">
+      <MyDiary
+        v-for="group in groupList"
+        :key="group.groupId"
+        :group="group"
+        class="w-4/9"
+      />
     </div>
   </div>
   <updateMsg v-model="showModal" />

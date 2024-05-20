@@ -14,7 +14,7 @@ const route = useRoute();
           class="hover:no-underline hover:text-blue-800"
         >
           <p
-            class="text-gray-400 text-xl my-3"
+            class="text-gray-400 text-lg my-3"
             :class="{
               'text-main-color': route.name === 'myinfo',
               'font-semibold': route.name === 'myinfo',
@@ -29,7 +29,7 @@ const route = useRoute();
           class="hover:no-underline hover:text-blue-800"
         >
           <p
-            class="text-gray-400 text-xl my-3"
+            class="text-gray-400 text-lg my-3"
             :class="{
               'text-main-color': route.name === 'password',
               'font-semibold': route.name === 'password',

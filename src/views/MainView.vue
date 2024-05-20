@@ -24,7 +24,9 @@ const user = computed(() => authStore.user);
           </div>
         </div>
         <div class="bg-gray-500 p-4 text-center rounded-xl">
-          <p class="text-white">내 정보 수정하기 ></p>
+          <RouterLink :to="{ name: 'myinfo' }" class="hover: no-underline"
+            ><p class="text-white">내 정보 수정하기 ></p></RouterLink
+          >
         </div>
       </div>
       <div class="ml-10 w-full">

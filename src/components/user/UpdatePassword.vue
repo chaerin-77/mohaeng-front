@@ -27,9 +27,9 @@ const joinForm = ref({
   <div>
     <p class="text-gray-500 text-xl font-semibold mb-5">비밀번호 변경하기</p>
   </div>
-  <div class="grid gap-x-6 gap-y-8">
+  <div class="grid gap-x-6 gap-y-8 place-items-center">
     <form @submit.prevent="join">
-      <div class="w-80 mb-4">
+      <div class="mb-4">
         <label for="password" class="block text-sm font-medium text-gray-900"
           >비밀번호</label
         >
@@ -41,11 +41,11 @@ const joinForm = ref({
             v-model="password"
             required
             @input="checkPasswordMatch"
-            class="block w-full rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+            class="block w-96 rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
           />
         </div>
       </div>
-      <div class="w-80 mb-4">
+      <div class="mb-4">
         <label for="ckpassword" class="block text-sm font-medium text-gray-900"
           >비밀번호 확인</label
         >
@@ -56,7 +56,7 @@ const joinForm = ref({
             type="password"
             v-model="confirmPassword"
             @input="checkPasswordMatch"
-            class="block w-full rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+            class="block w-96 rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
           />
         </div>
         <!-- 비밀번호 일치 여부를 표시하는 메시지 -->

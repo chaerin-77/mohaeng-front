@@ -28,7 +28,6 @@ export const useAuthStore = defineStore(
       //토큰 정보 및 유저 정보 삭제
       token.value = null;
       user.value = null;
-      window.localStorage.clear();
     };
 
     const setUserInfo = async () => {

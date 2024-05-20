@@ -65,13 +65,12 @@ const diaryForm = ref({
 const updateDiary = async () => {
   if (!confirm("이대로 가입하시겠습니까?")) return;
   try {
-    await groupStore.join(notice.value);
-    router.push("/");
+    await groupStore.update(diaryForm.value);
+    close();
   } catch (error) {
     console.error("에러:", error);
     alert("가입 실패");
   }
-  close;
 };
 </script>
 <template>
@@ -119,7 +118,7 @@ const updateDiary = async () => {
                 id="email"
                 name="email"
                 type="email"
-                v-model.trim="diaryForm.groupName"
+                v-model.trim="diaryForm.groupTitle"
                 required
                 class="block w-full rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 main-color placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
               />

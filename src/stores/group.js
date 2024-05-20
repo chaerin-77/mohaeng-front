@@ -115,6 +115,7 @@ export const useGroupStore = defineStore(
       getGroupList,
       setCurGroup,
       getMemberInfo,
+      update,
     };
   },
   { persist: { storage: sessionStorage } }

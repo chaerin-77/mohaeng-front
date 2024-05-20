@@ -4,7 +4,7 @@ import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
 const authStore = useAuthStore();
 const router = useRouter();
-
+const user = authStore.user;
 /* 비밀번호 일치 여부 체크 */
 const password = ref("");
 const confirmPassword = ref("");
@@ -14,13 +14,23 @@ const checkPasswordMatch = () => {
   passwordMatch.value = password.value === confirmPassword.value;
 };
 
-const joinForm = ref({
-  userId: "",
+const updatePwdForm = ref({
+  id: user.id,
   userPwd: password,
-  userName: "",
-  userPhone: "",
-  birthday: "",
 });
+
+const updatePwd = async () => {
+  if (!confirm("이대로 수정하시겠습니까?")) return;
+  if (passwordMatch) {
+    try {
+      await authStore.updatePwd(updatePwdForm.value);
+      router.push("/");
+    } catch (error) {
+      console.error("에러:", error);
+      alert("수정 실패");
+    }
+  }
+};
 </script>
 
 <template>
@@ -28,7 +38,7 @@ const joinForm = ref({
     <p class="text-gray-500 text-xl font-semibold mb-5">비밀번호 변경하기</p>
   </div>
   <div class="grid gap-x-6 gap-y-8 place-items-center">
-    <form @submit.prevent="join">
+    <form @submit.prevent="updatePwd">
       <div class="mb-4">
         <label for="password" class="block text-sm font-medium text-gray-900"
           >비밀번호</label

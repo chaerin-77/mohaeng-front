@@ -1,7 +1,6 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
 import authApi from "@/api/authApi";
-import { jwtDecode } from "jwt-decode";
 
 export const useAuthStore = defineStore(
   "auth",
@@ -39,7 +38,21 @@ export const useAuthStore = defineStore(
       user.value = response.data;
     };
 
-    return { user, token, join, login, logout };
+    const update = async (updateInfo) => {
+      const response = await authApi.put("/update", updateInfo, {
+        headers: { Authorization: `Bearer ${token.value}` },
+      });
+      await setUserInfo();
+    };
+
+    const updatePwd = async (pwdInfo) => {
+      const response = await authApi.put("/pwd", pwdInfo, {
+        headers: { Authorization: `Bearer ${token.value}` },
+      });
+      await setUserInfo();
+    };
+
+    return { user, token, join, login, logout, update, updatePwd };
   },
   { persist: { storage: localStorage } }
 );

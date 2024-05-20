@@ -47,26 +47,32 @@ onMounted(() => {
 
 // 공지 등록 부분
 import { useAuthStore } from "@/stores/auth";
+import { useGroupStore } from "@/stores/group";
 const authStore = useAuthStore();
-const diary = ref({
-  groupId: "",
-  groupName: "",
-  groupTitle: "",
-  groupImg: "",
-  startDate: "",
-  endDate: "",
+const groupStore = useGroupStore();
+const diary = groupStore.curgroup;
+const diaryForm = ref({
+  groupId: diary.groupId,
+  groupName: diary.groupName,
+  groupTitle: diary.groupTitle,
+  groupImg: diary.groupImg,
+  startDate: diary.startDate,
+  endDate: diary.endDate,
+  totalCnt: diary.totalCnt,
+  todayCnt: diary.todayCnt,
 });
 
-// const join = async () => {
-//   if (!confirm("이대로 가입하시겠습니까?")) return;
-//   try {
-//     await authStore.join(notice.value);
-//     router.push("/");
-//   } catch (error) {
-//     console.error("에러:", error);
-//     alert("가입 실패");
-//   }
-// };
+const updateDiary = async () => {
+  if (!confirm("이대로 가입하시겠습니까?")) return;
+  try {
+    await groupStore.join(notice.value);
+    router.push("/");
+  } catch (error) {
+    console.error("에러:", error);
+    alert("가입 실패");
+  }
+  close;
+};
 </script>
 <template>
   <div
@@ -98,7 +104,7 @@ const diary = ref({
                 id="email"
                 name="email"
                 type="email"
-                v-model.trim="diary.groupName"
+                v-model.trim="diaryForm.groupName"
                 required
                 class="block w-full rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 main-color placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
               />
@@ -113,7 +119,7 @@ const diary = ref({
                 id="email"
                 name="email"
                 type="email"
-                v-model.trim="diary.groupName"
+                v-model.trim="diaryForm.groupName"
                 required
                 class="block w-full rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 main-color placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
               />
@@ -129,6 +135,7 @@ const diary = ref({
                 id="startDate"
                 name="gdate"
                 type="date"
+                v-model.trim="diaryForm.startDate"
                 required
                 class="block w-full border-t-0 border-l-0 border-r-0 border-b-2 px-3 py-2 border-main-color main-color placeholder:text-gray-400 focus:bg-blue-100"
               />
@@ -137,6 +144,7 @@ const diary = ref({
                 id="endDate"
                 name="gdate"
                 type="date"
+                v-model.trim="diaryForm.endDate"
                 required
                 class="block w-full border-t-0 border-l-0 border-r-0 border-b-2 px-3 py-2 border-main-color main-color placeholder:text-gray-400 focus:bg-blue-100"
               />
@@ -151,7 +159,7 @@ const diary = ref({
                 id="email"
                 name="email"
                 type="email"
-                v-model.trim="diary.groupImg"
+                v-model.trim="diaryForm.groupImg"
                 required
                 class="block w-full rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 main-color placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
               />
@@ -160,7 +168,7 @@ const diary = ref({
         </div>
         <div class="text-center mt-5">
           <button
-            @click="close"
+            @click="updateDiary"
             class="px-4 py-2 text-sm text-white bg-main-color rounded-md focus:outline-none hover:text-black"
           >
             수정하기

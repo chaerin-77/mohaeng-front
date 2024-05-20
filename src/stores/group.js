@@ -93,6 +93,13 @@ export const useGroupStore = defineStore(
       curgroup.value = group;
     };
 
+    const update = async (updateInfo) => {
+      const response = await groupApi.put("", updateInfo, {
+        headers: { Authorization: `Bearer ${authStore.token}` },
+      });
+      setCurGroup(updateInfo);
+    };
+
     const calcCnt = async (groupId) => {};
 
     return {

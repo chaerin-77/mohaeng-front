@@ -2,10 +2,13 @@
 import { ref, computed } from "vue";
 import { RouterLink } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
+import { useGroupStore } from "@/stores/group";
 import MyDiary from "@/components/main/MyDiary.vue";
 
 const authStore = useAuthStore();
 const user = computed(() => authStore.user);
+const groupStore = useGroupStore();
+const groupList = computed(() => groupStore.groupList);
 </script>
 
 <template>
@@ -32,9 +35,13 @@ const user = computed(() => authStore.user);
       <div class="ml-10 w-full">
         <h1 class="text-white text-xl font-semibold mb-6">내 여행 모임</h1>
         <div class="flex p-5 border-2 border-white rounded-2xl">
-          <div class="text-center m-3">
+          <div
+            v-for="group in groupList"
+            :key="group.groupId"
+            class="text-center m-3"
+          >
             <div class="rounded-full border-2 border-white w-20 h-20"></div>
-            <p class="text-white text-md mt-3">동기 모임</p>
+            <p class="text-white text-md mt-3">{{ group.groupName }}</p>
           </div>
           <div class="text-center m-3">
             <RouterLink :to="{ name: 'invite' }">
@@ -54,7 +61,8 @@ const user = computed(() => authStore.user);
     </div>
   </div>
   <div class="container pt-20">
-    <MyDiary />
+    <p class="text-gray-500 text-xl font-semibold mb-5">나의 다이어리</p>
+    <MyDiary v-for="group in groupList" :key="group.groupId" :group="group" />
   </div>
 </template>
 

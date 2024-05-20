@@ -3,11 +3,17 @@ import { ref, computed } from "vue";
 import { RouterView, RouterLink, useRoute } from "vue-router";
 import UpdateDiary from "@/components/diary/UpdateDiary.vue";
 import { useAuthStore } from "@/stores/auth";
+import { useGroupStore } from "@/stores/group";
 
 const route = useRoute();
+// const group = route.params;
+// console.log(route.params);
 
 const authStore = useAuthStore();
 const user = computed(() => authStore.user);
+const groupStore = useGroupStore();
+const groupList = computed(() => groupStore.groupList);
+
 const showModal = ref(false);
 </script>
 
@@ -24,7 +30,7 @@ const showModal = ref(false);
         </div>
         <!-- 왼쪽 상단 내 프로필 -->
         <div
-          class="bg-main-color p-5 text-center rounded-xl grid place-items-center mb-5"
+          class="bg-main-color p-4 text-center rounded-xl grid place-items-center mb-5"
         >
           <div class="bg-gray-500 h-40 w-32"></div>
           <p class="text-white mt-4 text-lg">{{ user.userName }}</p>
@@ -33,11 +39,20 @@ const showModal = ref(false);
             <p class="text-white mb-3">다른 모임</p>
             <div class="flex">
               <div
+                v-for="othergroup in groupList"
+                :key="othergroup.groupId"
                 class="rounded-full border-2 border-white w-12 h-12 mr-2"
               ></div>
-              <div class="rounded-full bg-orange-300 w-12 h-12 pt-2.5">
-                <font-awesome-icon icon="plus" style="color: white" size="xl" />
-              </div>
+              <RouterLink :to="{ name: 'invite' }"
+                ><div
+                  class="hover:shadow-xl rounded-full bg-orange-300 w-12 h-12 pt-2.5"
+                >
+                  <font-awesome-icon
+                    icon="plus"
+                    style="color: white"
+                    size="xl"
+                  /></div
+              ></RouterLink>
             </div>
           </div>
         </div>
@@ -62,7 +77,7 @@ const showModal = ref(false);
           <!-- title 부분 -->
           <div class="mr-5">
             <span class="text-2xl font-semibold"
-              >친구들과 부산 나들이 다이어리
+              >{{ $route.params.groupTitle }}
             </span>
             <span class="text-xl font-medium text-gray-500 ml-5"
               >6반 여은파</span

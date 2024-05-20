@@ -11,7 +11,7 @@ const findUser = debounce(() => {
   if (word.value.length > 0) {
     groupStore.findUser(word.value);
   }
-}, 500);
+}, 300);
 </script>
 
 <template>

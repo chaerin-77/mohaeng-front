@@ -12,9 +12,8 @@ import DiaryHome from "@/components/diary/Home/DiaryHome.vue";
 import DiaryPlan from "../components/diary/Plan/DiaryPlan.vue";
 import DiaryMemory from "../components/diary/Memory/DiaryMemory.vue";
 
-import { storeToRefs } from "pinia";
-
 import { useAuthStore } from "@/stores/auth";
+import { useGroupStore } from "@/stores/group";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,6 +22,7 @@ const router = createRouter({
       path: "/",
       name: "main",
       component: MainView,
+      props: true,
       meta: {
         showNavbar: true,
         requiresAuth: true,
@@ -32,6 +32,7 @@ const router = createRouter({
       path: "/mypage",
       name: "mypage",
       component: MypageView,
+      props: true,
       meta: {
         showNavbar: true,
         requiresAuth: true,
@@ -40,11 +41,13 @@ const router = createRouter({
         {
           path: "myinfo",
           name: "myinfo",
+          props: true,
           component: UpdateMyInfo,
         },
         {
           path: "password",
           name: "password",
+          props: true,
           component: UpdatePassword,
         },
       ],
@@ -52,6 +55,7 @@ const router = createRouter({
     {
       path: "/user",
       component: UserView,
+      props: true,
       meta: {
         showNavbar: false,
         requiresAuth: false,
@@ -60,11 +64,13 @@ const router = createRouter({
         {
           path: "login",
           name: "login",
+          props: true,
           component: Login,
         },
         {
           path: "signup",
           name: "signup",
+          props: true,
           component: Signup,
         },
       ],
@@ -73,6 +79,7 @@ const router = createRouter({
       path: "/invite",
       name: "invite",
       component: InviteView,
+      props: true,
       meta: {
         showNavbar: true,
         requiresAuth: true,
@@ -81,6 +88,7 @@ const router = createRouter({
     {
       path: "/diary",
       component: DiaryView,
+      props: true,
       meta: {
         showNavbar: true,
         requiresAuth: true,
@@ -90,33 +98,42 @@ const router = createRouter({
           path: "home",
           name: "diaryHome",
           component: DiaryHome,
+          props: true,
         },
         {
           path: "plan",
           name: "diaryPlan",
           component: DiaryPlan,
+          props: true,
         },
         {
           path: "memory",
           name: "diaryMemory",
           component: DiaryMemory,
+          props: true,
         },
       ],
     },
   ],
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   window.scrollTo(0, 0);
 
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
   const authStore = useAuthStore();
+  const groupStore = useGroupStore();
 
   if (requiresAuth && !authStore.user) {
     alert("로그인 해주세요.");
     next({ name: "login" });
     return;
   }
+
+  if (to.name === "main") {
+    await groupStore.getGroupList(); // 메인 페이지로 이동할 때 실행할 함수
+  }
+
   next();
 });
 

@@ -1,5 +1,34 @@
 <script setup>
+import { ref } from "vue";
 import { RouterView, RouterLink, useRoute } from "vue-router";
+import memoryApi from "@/api/memoryApi";
+import { useGroupStore } from "@/stores/group";
+
+const groupStore = useGroupStore();
+const group = groupStore.curgroup;
+const memoryList = ref([]);
+const loading = async () => {
+  const response = await memoryApi.get("", {
+    params: {
+      groupId: group.groupId,
+    },
+  });
+
+  memoryList.value = response.data;
+  getMemberName();
+};
+
+const getMemberName = () => {
+  const userIdToName = {};
+  groupStore.curgroupInfo.forEach((member) => {
+    userIdToName[member.id] = member.userName;
+  });
+  memoryList.value = memoryList.value.map((memory) => {
+    const userName = userIdToName[memory.userId];
+    return { ...memory, userName };
+  });
+};
+loading();
 </script>
 
 <template>
@@ -12,19 +41,19 @@ import { RouterView, RouterLink, useRoute } from "vue-router";
         >
       </RouterLink>
     </div>
-    <div class="bg-gray-100 p-4 mx-5">
-      <div>
+    <div class="gap-y-5">
+      <div v-for="item in memoryList" class="bg-gray-100 p-4 mx-5 mb-3">
         <div class="flex place-items-center">
           <div class="bg-gray-500 w-10 h-12"></div>
           <div class="ml-3">
-            <p class="font-semibold">정채린</p>
-            <p class="text-gray-500">2024-05-21</p>
+            <p class="font-semibold">{{ item.userName }}</p>
+            <p class="text-gray-500">{{ item.writeTime }}</p>
           </div>
         </div>
         <hr class="my-4" />
         <div class="text-center grid place-items-center">
-          <div class="bg-gray-500 w-96 h-72"></div>
-          <p class="mt-3">오늘 너무 재밌었어~</p>
+          <div height="500px"><img height="100px" :src="item.img" /></div>
+          {{ item.content }}
         </div>
       </div>
     </div>

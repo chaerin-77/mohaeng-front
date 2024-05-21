@@ -9,6 +9,7 @@ const groupStore = useGroupStore();
 const authStore = useAuthStore();
 const router = useRouter();
 
+
 const groupForm = ref({
   groupName: "",
   groupTitle: "",
@@ -19,6 +20,25 @@ const groupForm = ref({
 
 const createGroup = async () => {
   if (!confirm("이대로 모임을 생성하시겠습니까?")) return;
+  const formData = new FormData();
+  let file = document.getElementById("gfile").files[0];
+
+  formData.append("image", file);
+  const response = await fetch(
+    "https://api.imgbb.com/1/upload?key=" + "02e43c8ec4af37cb23733f977ea04dca",
+    {
+      method: "POST",
+      body: formData,
+    }
+  );
+
+  if (response.ok) {
+    const data = await response.json();
+    groupForm.value.groupImg = data.data.url;
+    
+  }
+
+  
   try {
     await groupStore.createGroup(groupForm.value);
     router.push("/");
@@ -27,6 +47,10 @@ const createGroup = async () => {
     alert("모임 생성 실패");
   }
 };
+
+
+
+
 </script>
 
 <template>
@@ -95,8 +119,7 @@ const createGroup = async () => {
             <input
               id="gfile"
               name="gfile"
-              type="text"
-              v-model.trim="groupForm.groupImg"
+              type="file"
               required
               class="block w-full border-t-0 border-l-0 border-r-0 border-b-2 px-3 py-2 border-main-color main-color placeholder:text-gray-400 focus:bg-blue-100"
             />

@@ -63,7 +63,25 @@ const diaryForm = ref({
 });
 
 const updateDiary = async () => {
-  if (!confirm("이대로 가입하시겠습니까?")) return;
+  if (!confirm("이대로 수정하시겠습니까?")) return;
+
+  const formData = new FormData();
+  let file = document.getElementById("gfile").files[0];
+
+  formData.append("image", file);
+  const response = await fetch(
+    "https://api.imgbb.com/1/upload?key=" + "02e43c8ec4af37cb23733f977ea04dca",
+    {
+      method: "POST",
+      body: formData,
+    }
+  );
+
+  if (response.ok) {
+    const data = await response.json();
+    diaryForm.value.groupImg = data.data.url;
+    
+  }
   try {
     await groupStore.update(diaryForm.value);
     close();
@@ -155,10 +173,9 @@ const updateDiary = async () => {
             >
             <div class="mt-2">
               <input
-                id="email"
-                name="email"
-                type="email"
-                v-model.trim="diaryForm.groupImg"
+                id="gfile"
+                name="gfile"
+                type="file"
                 required
                 class="block w-full rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 main-color placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
               />

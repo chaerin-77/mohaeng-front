@@ -23,8 +23,10 @@ const getMemberName = () => {
   groupStore.curgroupInfo.forEach((member) => {
     userIdToName[member.id] = member.userName;
   });
+  
   memoryList.value = memoryList.value.map((memory) => {
     const userName = userIdToName[memory.userId];
+    
     return { ...memory, userName };
   });
 };

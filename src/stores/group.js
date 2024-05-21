@@ -56,6 +56,7 @@ export const useGroupStore = defineStore(
 
     // 그룹 생성하기
     const createGroup = async (groupInfo) => {
+      console.log(groupInfo);
       // 내 정보를 추가해서 보내기
       memberIntList.value.push(authStore.user.id);
 

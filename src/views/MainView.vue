@@ -50,7 +50,7 @@ const groupList = computed(() => groupStore.groupList);
             :key="group.groupId"
             class="text-center mr-3"
           >
-            <div class="rounded-full border-2 border-white w-20 h-20"></div>
+            <div class="rounded-full border-2 border-white w-20 h-20" :style= "`background-image: url(${group.groupImg}); background-size: cover; background-position: center;`"></div>
             <p class="text-white text-md mt-3">{{ group.groupName }}</p>
           </div>
           <div class="text-center">

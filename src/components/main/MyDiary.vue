@@ -13,7 +13,7 @@ const groupStore = useGroupStore();
 
 <template>
   <div class="flex mb-4 p-5 border border-gray-500 rounded-xl shadow-md">
-    <div class="bg-gray-500 h-48 w-36"></div>
+    <div class="bg-gray-500 h-48 w-36" :style= "`background-image: url(${group.groupImg}); background-size: cover; background-position: center;`"></div>
     <div class="ml-10">
       <p class="font-semibold text-lg text-gray-600">{{ group.groupTitle }}</p>
       <p class="text-md text-gray-600 mt-2">

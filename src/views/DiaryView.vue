@@ -44,7 +44,10 @@ const showModal2 = ref(false);
                 v-for="othergroup in groupList"
                 :key="othergroup.groupId"
                 class="rounded-full border-2 border-white w-12 h-12"
-              ></div>
+                :style= "`background-image: url(${othergroup.groupImg}); background-size: cover; background-position: center;`"
+              >
+              
+            </div>
               <RouterLink :to="{ name: 'invite' }"
                 ><div
                   class="hover:shadow-xl rounded-full bg-orange-300 w-12 h-12 pt-2.5"

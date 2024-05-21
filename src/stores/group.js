@@ -126,6 +126,19 @@ export const useGroupStore = defineStore(
       setCurGroup(updateInfo);
     };
 
+    const setMusic = async (groupMusic) => {
+      console.log("music: ", groupMusic);
+      const obj = {
+        groupId: curgroup.value.groupId,
+        groupMusic,
+      };
+      const response = await groupApi.put("/music", obj, {
+        headers: {
+          Authorization: `Bearer ${authStore.token}`,
+        },
+      });
+    };
+
     return {
       searchList,
       memberList,
@@ -141,6 +154,7 @@ export const useGroupStore = defineStore(
       getMemberInfo,
       update,
       updateMember,
+      setMusic,
     };
   },
   { persist: { storage: sessionStorage } }

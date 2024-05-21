@@ -3,6 +3,7 @@ import { ref, computed } from "vue";
 import { RouterView, RouterLink, useRoute } from "vue-router";
 import UpdateDiary from "@/components/diary/UpdateDiary.vue";
 import UpdateMember from "@/components/diary/UpdateMember.vue";
+import UpdateMusic from "@/components/diary/UpdateMusic.vue";
 import { useAuthStore } from "@/stores/auth";
 import { useGroupStore } from "@/stores/group";
 
@@ -17,6 +18,7 @@ groupStore.getMemberInfo(groupStore.curgroup);
 
 const showModal1 = ref(false);
 const showModal2 = ref(false);
+const showModal3 = ref(false);
 </script>
 
 <template>
@@ -44,10 +46,8 @@ const showModal2 = ref(false);
                 v-for="othergroup in groupList"
                 :key="othergroup.groupId"
                 class="rounded-full border-2 border-white w-12 h-12"
-                :style= "`background-image: url(${othergroup.groupImg}); background-size: cover; background-position: center;`"
-              >
-              
-            </div>
+                :style="`background-image: url(${othergroup.groupImg}); background-size: cover; background-position: center;`"
+              ></div>
               <RouterLink :to="{ name: 'invite' }"
                 ><div
                   class="hover:shadow-xl rounded-full bg-orange-300 w-12 h-12 pt-2.5"
@@ -168,8 +168,28 @@ const showModal2 = ref(false);
       </div>
     </div>
   </div>
+  <div
+    class="bg-main-color p-4 rounded-xl text-left fixed bottom-10 right-10 z-20 grid place-items-center"
+  >
+    <div class="bg-white mb-3 p-1" @click="showModal3 = true">
+      <a href="#" class="hover:no-underline hover:text-black">
+        <p class="text-lg">{{ groupStore.curgroup.groupMusic }}</p>
+      </a>
+    </div>
+    <audio controls autoplay>
+      <source
+        :src="require(`../assets/musics/${groupStore.curgroup.groupMusic}`)"
+        type="audio/mpeg"
+      />
+    </audio>
+    <div class="flex">
+      <font-awesome-icon icon="play" class="text-white" />
+      <font-awesome-icon icon="stop" class="text-white ml-3" />
+    </div>
+  </div>
   <UpdateDiary v-model="showModal1" />
   <UpdateMember v-model="showModal2" />
+  <UpdateMusic v-model="showModal3" />
 </template>
 
 <style scoped></style>

@@ -16,6 +16,7 @@ export const useGroupStore = defineStore(
     const curgroupInfo = ref([]);
 
     const findUser = async (word) => {
+      userList.value = [];
       const response = await authApi.get("/search", {
         params: {
           keyword: word,
@@ -32,7 +33,6 @@ export const useGroupStore = defineStore(
       filteredUsers.value = filteredUsers.value.filter(
         (user) => user.id !== authStore.user.id
       );
-      console.log("filteredUser: ", filteredUsers.value);
 
       userList.value = filteredUsers.value;
     };
@@ -88,6 +88,21 @@ export const useGroupStore = defineStore(
         },
       });
       curgroupInfo.value = response.data;
+      memberList.value = curgroupInfo.value;
+      // 나 자신을 검색하지 않도록
+      memberList.value = memberList.value.filter(
+        (user) => user.id !== authStore.user.id
+      );
+      memberIntList.value = memberList.value.map((member) => member.id);
+    };
+
+    const updateMember = async () => {
+      const groupInfo = { groupId: curgroup.value.groupId };
+      const obj = { groupInfo, userList: memberIntList.value };
+      const response = await groupApi.put("/users", obj, {
+        headers: { Authorization: `Bearer ${authStore.token}` },
+      });
+      getMemberInfo(curgroup.value);
     };
 
     const setCurGroup = async (group) => {
@@ -118,6 +133,7 @@ export const useGroupStore = defineStore(
       setCurGroup,
       getMemberInfo,
       update,
+      updateMember,
     };
   },
   { persist: { storage: sessionStorage } }

@@ -9,7 +9,6 @@ const route = useRoute();
 
 watchEffect(() => {
   // 특정 페이지에 대한 meta 정보 확인
-  console.log(route.meta.showNavbar);
   showNavbar.value = route.meta.showNavbar; // 네비게이션 바를 숨김
 });
 </script>

@@ -6,7 +6,6 @@ const { removeMember } = groupStore;
 
 <template>
   <div class="">
-    <p class="text-sm font-medium text-gray-900">초대할 멤버</p>
     <div class="mb-4 mt-2 w-full">
       <div v-for="user in groupStore.memberList" :key="user.id">
         <div class="mt-1 py-3 bg-gray-100 flex justify-evenly">

@@ -103,8 +103,14 @@ const createGroup = async () => {
           </div>
         </div>
       </div>
-      <SearchMember class="w-1/3 px-5" />
-      <MemberList class="w-1/3 px-5" />
+      <div class="w-1/3 px-5">
+        <p class="text-sm font-medium text-gray-900">모임 멤버 초대하기</p>
+        <SearchMember />
+      </div>
+      <div class="w-1/3 px-5">
+        <p class="text-sm font-medium text-gray-900">초대할 멤버</p>
+        <MemberList />
+      </div>
     </div>
     <div class="mt-10 flex items-center justify-center gap-x-6">
       <input

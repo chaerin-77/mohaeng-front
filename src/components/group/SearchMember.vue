@@ -16,7 +16,6 @@ const findUser = debounce(() => {
 
 <template>
   <div class="">
-    <p class="text-sm font-medium text-gray-900">모임 멤버 초대하기</p>
     <div class="mb-4 mt-2 w-full">
       <div class="flex mb-2 justify-between">
         <input

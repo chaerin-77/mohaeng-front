@@ -25,22 +25,26 @@ const uploadImg = async () => {
   const formData = new FormData();
   let file = document.getElementById("upload").files[0];
   console.log(file);
+  if (file != null) {
+    formData.append("image", file);
+    const response = await fetch(
+      "https://api.imgbb.com/1/upload?key=" +
+        "02e43c8ec4af37cb23733f977ea04dca",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
 
-  formData.append("image", file);
-  const response = await fetch(
-    "https://api.imgbb.com/1/upload?key=" + "02e43c8ec4af37cb23733f977ea04dca",
-    {
-      method: "POST",
-      body: formData,
+    if (response.ok) {
+      const data = await response.json();
+      memoryForm.value.img = data.data.url;
     }
-  );
-
-  if (response.ok) {
-    const data = await response.json();
-    memoryForm.value.img = data.data.url;
-    setMemory();
-    router.push({ name: "diaryMemory" });
   }
+
+  setMemory();
+  const targetRoute = router.resolve({ name: "diaryMemory" });
+  window.location.href = targetRoute.href; // 페이지 새로고침 포함 이동
 };
 
 const setMemory = async () => {

@@ -3,7 +3,8 @@ import { ref } from "vue";
 import { RouterView, RouterLink, useRoute } from "vue-router";
 import memoryApi from "@/api/memoryApi";
 import { useGroupStore } from "@/stores/group";
-
+import { useAuthStore } from "@/stores/auth";
+const authStore = useAuthStore();
 const groupStore = useGroupStore();
 const group = groupStore.curgroup;
 const memoryList = ref([]);
@@ -23,14 +24,29 @@ const getMemberName = () => {
   groupStore.curgroupInfo.forEach((member) => {
     userIdToName[member.id] = member.userName;
   });
-  
+
   memoryList.value = memoryList.value.map((memory) => {
     const userName = userIdToName[memory.userId];
-    
+
     return { ...memory, userName };
   });
 };
 loading();
+
+const deleteMemory = async (memoryId) => {
+  const response = await memoryApi.delete(
+    "",
+    {
+      params: {
+        memoryId,
+      },
+    },
+    {
+      headers: { Authorization: `Bearer ${authStore.token}` },
+    }
+  );
+  window.location.reload(true);
+};
 </script>
 
 <template>
@@ -45,12 +61,23 @@ loading();
     </div>
     <div class="gap-y-5">
       <div v-for="item in memoryList" class="bg-gray-100 p-4 mx-5 mb-3">
-        <div class="flex place-items-center">
-          <div class="bg-gray-500 w-10 h-12"></div>
-          <div class="ml-3">
-            <p class="font-semibold">{{ item.userName }}</p>
-            <p class="text-gray-500">{{ item.writeTime }}</p>
+        <div class="flex justify-between">
+          <div class="flex">
+            <div class="bg-gray-500 w-10 h-12"></div>
+            <div class="ml-3">
+              <p v-if="item.userId === authStore.user.id" class="font-semibold">
+                {{ authStore.user.userName }}
+              </p>
+              <p v-else class="font-semibold">{{ item.userName }}</p>
+              <p class="text-gray-500">{{ item.writeTime }}</p>
+            </div>
           </div>
+          <font-awesome-icon
+            v-if="item.userId === authStore.user.id"
+            icon="fa-regular fa-trash-can"
+            class="text-red-400 w-5 h-5 mt-1 hover:text-gray-400"
+            @click="deleteMemory(item.memoryId)"
+          />
         </div>
         <hr class="my-4" />
         <div class="text-center grid place-items-center">

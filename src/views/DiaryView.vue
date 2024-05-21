@@ -146,11 +146,17 @@ const showModal2 = ref(false);
         >
           <div
             class="w-24 border-2 border-l-0 border-main-color grid place-items-center pt-2 pb-2"
-            :class="{ 'bg-main-color': route.name === 'diaryMemory' }"
+            :class="{
+              'bg-main-color':
+                route.name === 'diaryMemory' || route.name === 'addMemory',
+            }"
           >
             <p
               class="text-main-color"
-              :class="{ 'text-white': route.name === 'diaryMemory' }"
+              :class="{
+                'text-white':
+                  route.name === 'diaryMemory' || route.name === 'addMemory',
+              }"
             >
               MEMORY
             </p>

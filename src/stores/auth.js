@@ -20,21 +20,40 @@ export const useAuthStore = defineStore(
       const response = await authApi.post("/login", loginInfo);
 
       //토큰 정보 및 유저 정보 세팅
-      token.value = response.data;
-      await setUserInfo();
+      let localToken = response.data;
+      token.value = localToken;
+
+      let localUser = await setUserInfo();
+      localStorage.setItem(
+        "auth",
+        JSON.stringify({
+          user: localUser,
+          token: localToken,
+        })
+      );
+
+      user.value = localUser;
     };
 
     const logout = () => {
       //토큰 정보 및 유저 정보 삭제
       token.value = null;
       user.value = null;
+
+      localStorage.setItem(
+        "auth",
+        JSON.stringify({
+          user: "",
+          token: "",
+        })
+      );
     };
 
     const setUserInfo = async () => {
       const response = await authApi.get("/userInfo", {
         headers: { Authorization: `Bearer ${token.value}` },
       });
-      user.value = response.data;
+      return response.data;
     };
 
     const update = async (updateInfo) => {
@@ -53,7 +72,7 @@ export const useAuthStore = defineStore(
 
     const addMsg = async (content) => {
       const obj = { id: user.id, message: content };
-      const response = await authApi.put("/update", obj, {
+      const response = await authApi.put("/msg", obj, {
         headers: { Authorization: `Bearer ${token.value}` },
       });
       await setUserInfo();
@@ -61,5 +80,5 @@ export const useAuthStore = defineStore(
 
     return { user, token, join, login, logout, update, updatePwd, addMsg };
   },
-  { persist: { storage: localStorage } }
+  { persist: true }
 );

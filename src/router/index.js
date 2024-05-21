@@ -11,6 +11,7 @@ import DiaryView from "@/views/DiaryView.vue";
 import DiaryHome from "@/components/diary/Home/DiaryHome.vue";
 import DiaryPlan from "../components/diary/Plan/DiaryPlan.vue";
 import DiaryMemory from "../components/diary/Memory/DiaryMemory.vue";
+import AddMemory from "@/components/diary/Memory/AddMemory.vue";
 
 import { useAuthStore } from "@/stores/auth";
 import { useGroupStore } from "@/stores/group";
@@ -113,6 +114,12 @@ const router = createRouter({
           path: "memory",
           name: "diaryMemory",
           component: DiaryMemory,
+          props: true,
+        },
+        {
+          path: "addmemory",
+          name: "addMemory",
+          component: AddMemory,
           props: true,
         },
       ],

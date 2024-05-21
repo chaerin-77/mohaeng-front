@@ -8,7 +8,7 @@ export const useGroupStore = defineStore(
   "group",
   () => {
     const authStore = useAuthStore();
-    const userList = ref([]);
+    const searchList = ref([]);
     const memberList = ref([]);
     const memberIntList = ref([]);
     const groupList = ref([]);
@@ -21,20 +21,20 @@ export const useGroupStore = defineStore(
           keyword: word,
         },
       });
-      // memberList에 없는 사용자만 userList에 추가
+
+      // memberList에 없는 사용자만 searchList에 추가
       const filteredUsers = ref([]);
       filteredUsers.value = response.data.filter(
         (user) =>
-          !memberList.value.some((member) => member.userId !== user.userId)
+          !memberList.value.some((member) => member.userId === user.userId)
       );
 
       // 나 자신을 검색하지 않도록
       filteredUsers.value = filteredUsers.value.filter(
         (user) => user.id !== authStore.user.id
       );
-      console.log("filteredUser: ", filteredUsers.value);
 
-      userList.value = filteredUsers.value;
+      searchList.value = filteredUsers.value;
     };
 
     const addMember = (user) => {
@@ -42,7 +42,7 @@ export const useGroupStore = defineStore(
       memberIntList.value.push(user.id);
 
       // 선택된 유저 제거
-      userList.value = userList.value.filter(
+      searchList.value = searchList.value.filter(
         (search) => user.userId !== search.userId
       );
     };
@@ -67,6 +67,7 @@ export const useGroupStore = defineStore(
       const response = await groupApi.post("", requestMakegroup, {
         headers: { Authorization: `Bearer ${authStore.token}` },
       });
+      searchList.value = [];
       memberList.value = [];
       memberIntList.value = [];
     };
@@ -78,7 +79,6 @@ export const useGroupStore = defineStore(
         },
       });
       groupList.value = response.data;
-      console.log(groupList.value);
     };
 
     const getMemberInfo = async (group) => {
@@ -87,7 +87,15 @@ export const useGroupStore = defineStore(
           groupId: group.groupId,
         },
       });
-      curgroupInfo.value = response.data;
+
+      console.log("data: ", response.data);
+      curgroupInfo.value = response.data.filter(
+        (user) => user.id !== authStore.user.id
+      );
+      console.log("memberint: ", memberIntList.value);
+      memberList.value = curgroupInfo.value;
+      memberIntList.value = memberList.value.map((member) => member.id);
+      console.log("groupInfo: ", curgroupInfo.value);
     };
 
     const setCurGroup = async (group) => {
@@ -95,6 +103,19 @@ export const useGroupStore = defineStore(
         params: { groupId: group.groupId },
       });
       curgroup.value = response.data;
+      getMemberInfo(curgroup.value);
+      searchList.value = [];
+    };
+
+    const updateMember = async () => {
+      // 내 정보를 추가해서 보내기
+      memberIntList.value.push(authStore.user.id);
+      const groupInfo = { groupId: curgroup.value.groupId };
+      const obj = { groupInfo, userList: memberIntList.value };
+      const response = await groupApi.put("/users", obj, {
+        headers: { Authorization: `Bearer ${authStore.token}` },
+      });
+      getMemberInfo(curgroup.value);
     };
 
     const update = async (updateInfo) => {
@@ -105,7 +126,7 @@ export const useGroupStore = defineStore(
     };
 
     return {
-      userList,
+      searchList,
       memberList,
       groupList,
       curgroup,
@@ -118,6 +139,7 @@ export const useGroupStore = defineStore(
       setCurGroup,
       getMemberInfo,
       update,
+      updateMember,
     };
   },
   { persist: { storage: sessionStorage } }

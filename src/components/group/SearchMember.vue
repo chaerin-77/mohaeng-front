@@ -16,7 +16,6 @@ const findUser = debounce(() => {
 
 <template>
   <div class="">
-    <p class="text-sm font-medium text-gray-900">모임 멤버 초대하기</p>
     <div class="mb-4 mt-2 w-full">
       <div class="flex mb-2 justify-between">
         <input
@@ -36,7 +35,7 @@ const findUser = debounce(() => {
           검색
         </button>
       </div>
-      <div v-for="user in groupStore.userList" :key="user.id">
+      <div v-for="user in groupStore.searchList" :key="user.id">
         <div class="mt-1 py-3 bg-gray-100 flex justify-evenly">
           <p>{{ user.userName }}</p>
           <p>{{ user.userId }}</p>

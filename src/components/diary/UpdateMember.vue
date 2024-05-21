@@ -46,20 +46,19 @@ onMounted(() => {
 });
 
 // 멤버 수정 부분
-import { useNoticeStore } from "@/stores/notice";
-const noticeStore = useNoticeStore();
-const content = ref("");
+import SearchMember from "../group/SearchMember.vue";
+import MemberList from "../group/MemberList.vue";
+import { useGroupStore } from "@/stores/group";
+const groupStore = useGroupStore();
 
-const addNotice = async () => {
-  if (!confirm("이대로 등록하시겠습니까?")) return;
-  if (content.value.length > 0) {
-    try {
-      await noticeStore.addNotice(content.value);
-      close();
-    } catch (error) {
-      console.error("에러:", error);
-      alert("등록 실패");
-    }
+const updateMember = async () => {
+  if (!confirm("이대로 수정하시겠습니까?")) return;
+  try {
+    await groupStore.updateMember();
+    close();
+  } catch (error) {
+    console.error("에러:", error);
+    alert("수정 실패");
   }
 };
 </script>
@@ -72,9 +71,9 @@ const addNotice = async () => {
       class="absolute w-full h-full bg-gray-900 opacity-50"
       @click="close"
     ></div>
-    <div class="absolute max-h-full max-w-lg">
-      <div class="container bg-white overflow-hidden rounded-md p-5">
-        <div class="pb-4 flex justify-between font-medium border-b">
+    <div class="absolute max-h-1/2 w-2/3">
+      <div class="container bg-white rounded-md p-5">
+        <div class="pb-4 mx-5 my-3 flex justify-between font-medium border-b">
           <p class="text-xl font-semibold text-gray-500">멤버 수정하기</p>
           <div
             @click="close"
@@ -84,19 +83,21 @@ const addNotice = async () => {
           </div>
         </div>
         <div class="my-4">
-          <div class="mt-2">
-            <input
-              type="text"
-              v-model="content"
-              required
-              class="block w-96 h-52 rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 main-color placeholder:text-gray-400"
-            />
+          <div class="flex justify-between px-5">
+            <div class="w-2/5">
+              <p class="text-sm font-medium text-gray-900">멤버 검색</p>
+              <SearchMember />
+            </div>
+            <div class="w-2/5">
+              <p class="text-sm font-medium text-gray-900">현재 멤버</p>
+              <MemberList />
+            </div>
           </div>
         </div>
         <div class="text-center mt-5">
           <button
-            @click="addNotice()"
-            class="px-4 py-2 text-sm text-white bg-main-color rounded-md focus:outline-none hover:text-black"
+            @click="updateMember"
+            class="px-4 py-2 text-white bg-main-color rounded-md focus:outline-none hover:text-black"
           >
             수정하기
           </button>

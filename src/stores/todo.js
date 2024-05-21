@@ -19,7 +19,6 @@ export const useTodoStore = defineStore(
         },
       });
       todoList.value = response.data;
-      console.log("todoList: ", todoList.value);
     };
 
     const addTodo = async (title) => {

@@ -9,7 +9,6 @@ const groupStore = useGroupStore();
 const authStore = useAuthStore();
 const router = useRouter();
 
-
 const groupForm = ref({
   groupName: "",
   groupTitle: "",
@@ -35,10 +34,8 @@ const createGroup = async () => {
   if (response.ok) {
     const data = await response.json();
     groupForm.value.groupImg = data.data.url;
-    
   }
 
-  
   try {
     await groupStore.createGroup(groupForm.value);
     router.push("/");
@@ -47,10 +44,6 @@ const createGroup = async () => {
     alert("모임 생성 실패");
   }
 };
-
-
-
-
 </script>
 
 <template>

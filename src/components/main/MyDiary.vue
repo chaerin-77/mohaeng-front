@@ -9,7 +9,6 @@ const user = computed(() => authStore.user);
 
 const props = defineProps({ group: Object });
 const groupStore = useGroupStore();
-groupStore.getMemberInfo(props.group);
 </script>
 
 <template>
@@ -35,7 +34,7 @@ groupStore.getMemberInfo(props.group);
     <div class="ml-20">
       <RouterLink
         :to="{ name: 'diaryHome' }"
-        @click.native="groupStore.setCurGroup(group)"
+        @click="groupStore.setCurGroup(group)"
         class="text-main-color font-semibold hover:no-underline"
       >
         다이어리 확인하기 >

@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^1.6.8",
     "bootstrap": "^4.6.2",
+    "dayjs": "^1.11.11",
     "flowbite": "^2.3.0",
     "flowbite-vue": "^0.1.4",
     "jwt-decode": "^4.0.0",

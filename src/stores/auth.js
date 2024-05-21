@@ -14,6 +14,14 @@ export const useAuthStore = defineStore(
       //토큰 정보 및 유저 정보 세팅(회원 가입 후, 로그인 따로 할 필요 없음)
       token.value = response.data;
       await setUserInfo();
+      localStorage.setItem(
+        "auth",
+        JSON.stringify({
+          user: localUser,
+          token: localToken,
+        })
+      );
+      user.value = localUser;
     };
 
     const login = async (loginInfo) => {
@@ -80,5 +88,5 @@ export const useAuthStore = defineStore(
 
     return { user, token, join, login, logout, update, updatePwd, addMsg };
   },
-  { persist: true }
+  { persist: { storage: localStorage } }
 );

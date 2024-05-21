@@ -152,6 +152,7 @@ router.beforeEach(async (to, from, next) => {
     await noticeStore.getNoticeList();
     await todoStore.getTodoList();
     await chatStore.getChatlist();
+    // console.log("beforeEach");
   }
 
   next();

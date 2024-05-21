@@ -11,10 +11,13 @@ const back = () => {
     <p class="text-xl font-semibold mb-4 text-center">추억 작성하기</p>
     <div class="border border-main-color w-full p-5 mb-5">
       <form>
-        <div>
-          <p class="mb-3">오늘 너무 재밌었어~</p>
-          <div class="bg-gray-500 w-52 h-32"></div>
+        <div class="mb-3">
+          <textarea class="w-full h-64 overflow-y-scroll">
+오늘 너무 재밌었어~</textarea
+          >
         </div>
+        <hr class="my-4" />
+        <input type="file" />
       </form>
     </div>
     <div class="flex gap-x-5">

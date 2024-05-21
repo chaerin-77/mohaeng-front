@@ -75,7 +75,7 @@ const addNotice = async () => {
     <div class="absolute max-h-full max-w-lg">
       <div class="container bg-white overflow-hidden rounded-md p-5">
         <div class="pb-4 flex justify-between font-medium border-b">
-          <p class="text-xl font-semibold text-gray-500">공지 등록하기</p>
+          <p class="text-xl font-semibold text-gray-500">멤버 수정하기</p>
           <div
             @click="close"
             class="text-2xl hover:text-gray-600 cursor-pointer"
@@ -98,7 +98,7 @@ const addNotice = async () => {
             @click="addNotice()"
             class="px-4 py-2 text-sm text-white bg-main-color rounded-md focus:outline-none hover:text-black"
           >
-            등록하기
+            수정하기
           </button>
         </div>
       </div>

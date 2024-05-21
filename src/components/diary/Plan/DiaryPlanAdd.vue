@@ -40,6 +40,10 @@ const planForm = ref({
 });
 
 const createPlan = async (contentId) => {
+  if (planForm.value.date === "") {
+    alert("날짜를 선택해주세요.");
+    return;
+  }
   planForm.value.contentId = contentId;
   console.log("contentID: ", contentId);
   await attrStore.createPlan(planForm.value);

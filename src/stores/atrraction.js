@@ -12,6 +12,8 @@ export const useAttractionStore = defineStore(
     const authStore = useAuthStore();
     const sidoList = ref([]);
     const typeList = ref([]);
+    const searchList = ref([]);
+    const planList = ref([]);
 
     // 시작 날짜와 종료 날짜 사이의 날짜 배열을 계산하는 함수
     const dateRange = computed(() => {
@@ -40,7 +42,59 @@ export const useAttractionStore = defineStore(
       typeList.value = response.data;
     };
 
-    return { dateRange, sidoList, typeList, getSidoList, getTypeList };
+    const search = async (searchForm) => {
+      const response = await attractionApi.post("/search", searchForm, {
+        headers: { Authorization: `Bearer ${authStore.token}` },
+      });
+      searchList.value = response.data;
+      console.log("searchList: ", searchList.value);
+    };
+
+    const createPlan = async (planForm) => {
+      const response = await attractionApi.post("", planForm, {
+        headers: { Authorization: `Bearer ${authStore.token}` },
+      });
+      getPlan();
+      console.log("planList: ", planList.value);
+    };
+
+    const getPlan = async () => {
+      const response = await attractionApi.get("", {
+        params: {
+          groupId: groupStore.curgroup.groupId,
+        },
+      });
+      planList.value = response.data;
+    };
+
+    const deletePlan = async (planId) => {
+      const response = await attractionApi.delete(
+        "",
+        {
+          params: {
+            planId,
+          },
+        },
+        {
+          headers: { Authorization: `Bearer ${authStore.token}` },
+        }
+      );
+      getPlan();
+    };
+
+    return {
+      dateRange,
+      sidoList,
+      typeList,
+      searchList,
+      planList,
+      getSidoList,
+      getTypeList,
+      search,
+      createPlan,
+      getPlan,
+      deletePlan,
+    };
   },
   {
     persist: { storage: sessionStorage },

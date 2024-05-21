@@ -12,8 +12,10 @@ export const useAuthStore = defineStore(
       const response = await authApi.post("/join", joinInfo);
 
       //토큰 정보 및 유저 정보 세팅(회원 가입 후, 로그인 따로 할 필요 없음)
-      token.value = response.data;
-      await setUserInfo();
+      let localToken = response.data;
+      token.value = localToken;
+
+      let localUser = await setUserInfo();
       localStorage.setItem(
         "auth",
         JSON.stringify({

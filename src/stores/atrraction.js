@@ -12,7 +12,6 @@ export const useAttractionStore = defineStore(
     const authStore = useAuthStore();
     const sidoList = ref([]);
     const typeList = ref([]);
-    const searchList = ref([]);
     const planList = ref([]);
 
     // 시작 날짜와 종료 날짜 사이의 날짜 배열을 계산하는 함수
@@ -40,14 +39,6 @@ export const useAttractionStore = defineStore(
     const getTypeList = async () => {
       const response = await attractionApi.get("/type");
       typeList.value = response.data;
-    };
-
-    const search = async (searchForm) => {
-      const response = await attractionApi.post("/search", searchForm, {
-        headers: { Authorization: `Bearer ${authStore.token}` },
-      });
-      searchList.value = response.data;
-      console.log("searchList: ", searchList.value);
     };
 
     const createPlan = async (planForm) => {
@@ -86,11 +77,9 @@ export const useAttractionStore = defineStore(
       dateRange,
       sidoList,
       typeList,
-      searchList,
       planList,
       getSidoList,
       getTypeList,
-      search,
       createPlan,
       getPlan,
       deletePlan,

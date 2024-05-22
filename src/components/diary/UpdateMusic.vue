@@ -88,16 +88,31 @@ const setMusic = async () => {
                 required
                 class="block w-full rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 main-color placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
               >
-                <option value="Bulbasound_-_Meditation.mp3">
-                  Bulbasound_-_Meditation.mp3
+                <option value="A Year Ago.mp3">A Year Ago</option>
+                <option value="Always Be My Unicorn.mp3">
+                  Always Be My Unicorn
                 </option>
-                <option value="Carlos_Estella_-_Epic_Uplifting_Inspiration.mp3">
-                  Carlos_Estella_-_Epic_Uplifting_Inspiration
+                <option value="Bulbasound.mp3">Bulbasound</option>
+                <option value="Good Days.mp3">Good Days</option>
+                <option value="Handcrafted.mp3">Handcrafted</option>
+                <option value="Night Run Away.mp3">Night Run Away</option>
+                <option value="Reason_to_Stay_(feat._undy).mp3">
+                  Reason_to_Stay_(feat._undy)
                 </option>
-                <option
-                  value="OnClassical_-_alessandro_deljavan_bach_little_preludes_and_wtc_alternative_versions_01_clavier_buechlein_vor_wh._f._bach_no._1_applicatio_bwv_.mp3"
-                >
-                  OnClassical_-_alessandro_deljavan_bach_little_preludes_and_wtc_alternative_versions_01_clavier_buechlein_vor_wh._f._bach_no._1_applicatio_bwv_
+                <option value="Serenity - Lish Grooves.mp3">
+                  Serenity - Lish Grooves
+                </option>
+                <option value="So Sweet - Lish Grooves.mp3">
+                  So Sweet - Lish Grooves
+                </option>
+                <option value="Summer Solstice on the June Planet.mp3">
+                  Summer Solstice on the June Planet
+                </option>
+                <option value="Summer Somewhere In Cuba.mp3">
+                  Summer Somewhere In Cuba
+                </option>
+                <option value="The Rainy Road - Lish Grooves.mp3">
+                  The Rainy Road - Lish Grooves
                 </option>
               </select>
             </div>
@@ -116,38 +131,4 @@ const setMusic = async () => {
   </div>
 </template>
 
-<style scoped>
-/* 움직이는 텍스트 */
-.animated-title {
-  font-size: 60px;
-  font-family: "Raleway", Sans-serif;
-  font-weight: 300;
-  position: relative;
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  padding: 100px 0;
-  overflow-x: hidden;
-  overflow-y: hidden;
-}
-.animated-title .track {
-  position: absolute;
-  white-space: nowrap;
-  will-change: transform;
-  animation: marquee 60s linear infinite;
-}
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-@media (hover: hover) and (min-width: 700px) {
-  .animated-title .content {
-    -webkit-transform: translateY(calc(100% - 8rem));
-    transform: translateY(calc(100% - 8rem));
-  }
-}
-</style>
+<style scoped></style>

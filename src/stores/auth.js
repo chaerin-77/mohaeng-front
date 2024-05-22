@@ -70,14 +70,30 @@ export const useAuthStore = defineStore(
       const response = await authApi.put("/update", updateInfo, {
         headers: { Authorization: `Bearer ${token.value}` },
       });
-      await setUserInfo();
+      let localUser = await setUserInfo();
+      localStorage.setItem(
+        "auth",
+        JSON.stringify({
+          user: localUser,
+          token: token.value,
+        })
+      );
+
+      user.value = localUser;
     };
 
     const updatePwd = async (pwdInfo) => {
       const response = await authApi.put("/pwd", pwdInfo, {
         headers: { Authorization: `Bearer ${token.value}` },
       });
-      await setUserInfo();
+      let localUser = await setUserInfo();
+      localStorage.setItem(
+        "auth",
+        JSON.stringify({
+          user: localUser,
+          token: token.value,
+        })
+      );
     };
 
     const addMsg = async (content) => {
@@ -85,7 +101,14 @@ export const useAuthStore = defineStore(
       const response = await authApi.put("/msg", obj, {
         headers: { Authorization: `Bearer ${token.value}` },
       });
-      await setUserInfo();
+      let localUser = await setUserInfo();
+      localStorage.setItem(
+        "auth",
+        JSON.stringify({
+          user: localUser,
+          token: token.value,
+        })
+      );
     };
 
     return { user, token, join, login, logout, update, updatePwd, addMsg };

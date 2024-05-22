@@ -44,6 +44,8 @@ const createGroup = async () => {
     alert("모임 생성 실패");
   }
 };
+groupStore.searchList = [];
+groupStore.memberList = [];
 </script>
 
 <template>

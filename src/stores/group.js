@@ -137,6 +137,7 @@ export const useGroupStore = defineStore(
           Authorization: `Bearer ${authStore.token}`,
         },
       });
+      setCurGroup(curgroup.value);
     };
 
     return {

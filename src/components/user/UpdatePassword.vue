@@ -35,11 +35,11 @@ const updatePwd = async () => {
 
 <template>
   <div>
-    <p class="text-gray-500 text-xl font-semibold mb-5">비밀번호 변경하기</p>
+    <p class="text-gray-500 text-xl font-semibold mb-24">비밀번호 변경하기</p>
   </div>
-  <div class="grid gap-x-6 gap-y-8 place-items-center">
+  <div class="grid place-items-center">
     <form @submit.prevent="updatePwd">
-      <div class="mb-4">
+      <div class="mb-14">
         <label for="password" class="block text-sm font-medium text-gray-900"
           >비밀번호</label
         >
@@ -55,7 +55,7 @@ const updatePwd = async () => {
           />
         </div>
       </div>
-      <div class="mb-4">
+      <div class="mb-14">
         <label for="ckpassword" class="block text-sm font-medium text-gray-900"
           >비밀번호 확인</label
         >
@@ -75,7 +75,7 @@ const updatePwd = async () => {
         </p>
       </div>
 
-      <div class="mt-14 flex items-center justify-center gap-x-6">
+      <div class="mt-20 flex items-center justify-center gap-x-6">
         <input
           type="submit"
           class="rounded-xl bg-main-color px-12 py-3 text-md font-semibold text-white shadow-md hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ring-1 ring-inset ring-gray-300"

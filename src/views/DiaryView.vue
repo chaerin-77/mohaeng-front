@@ -105,7 +105,7 @@ const showModal3 = ref(false);
           class="bg-main-color p-4 text-center rounded-xl grid place-items-center mb-5 w-52"
         >
           <div
-            class="bg-gray-500 h-40 w-32"
+            class="bg-white h-32 w-32"
             :style="`background-image: url(${user.img}); background-size: cover; background-position: center;`"
           ></div>
           <p class="text-white mt-4 text-lg">{{ user.userName }}</p>

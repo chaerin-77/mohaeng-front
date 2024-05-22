@@ -21,7 +21,7 @@ const setting = async () => {
 <template>
   <div class="flex mb-4 p-5 border border-gray-500 rounded-xl shadow-md">
     <div
-      class="bg-gray-500 h-48 w-36"
+      class="h-48 w-36"
       :style="`background-image: url(${group.groupImg}); background-size: cover; background-position: center;`"
     ></div>
     <div class="ml-10">

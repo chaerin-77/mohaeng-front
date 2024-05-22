@@ -5,6 +5,81 @@ import { useAuthStore } from "@/stores/auth";
 const authStore = useAuthStore();
 const router = useRouter();
 
+const imgList = ref([
+  {
+    select: false,
+    value: "/src/assets/profile/free-icon-bird-1067920.png",
+  },
+  {
+    select: false,
+    value: "/src/assets/profile/free-icon-blogger-3983265.png",
+  },
+  {
+    select: false,
+    value: "/src/assets/profile/free-icon-boy-1149922.png",
+  },
+  {
+    select: false,
+    value: "/src/assets/profile/free-icon-boy-2945467.png",
+  },
+  {
+    select: false,
+    value: "/src/assets/profile/free-icon-carrot-1391334.png",
+  },
+  {
+    select: false,
+    value: "/src/assets/profile/free-icon-man-2233922.png",
+  },
+  {
+    select: false,
+    value: "/src/assets/profile/free-icon-mouse-1067929.png",
+  },
+  {
+    select: false,
+    value: "/src/assets/profile/free-icon-obesity-3136113.png",
+  },
+  {
+    select: false,
+    value: "/src/assets/profile/free-icon-old-man-3544946.png",
+  },
+  {
+    select: false,
+    value: "/src/assets/profile/free-icon-old-woman-2902101.png",
+  },
+  {
+    select: false,
+    value: "/src/assets/profile/free-icon-shark-1841101.png",
+  },
+  {
+    select: false,
+    value: "/src/assets/profile/free-icon-student-1046374.png",
+  },
+  {
+    select: false,
+    value: "/src/assets/profile/free-icon-student-4472533.png",
+  },
+  {
+    select: false,
+    value: "/src/assets/profile/free-icon-tourist-15773500.png",
+  },
+  {
+    select: false,
+    value: "/src/assets/profile/free-icon-woman-2423916.png",
+  },
+  {
+    select: false,
+    value: "/src/assets/profile/free-icon-young-15370950.png",
+  },
+]);
+
+const selectImg = ref(1);
+const clickEvent = (idx) => {
+  console.log(idx, " : ", imgList.value[idx]);
+  imgList.value[selectImg.value].select = false;
+  imgList.value[idx].select = true;
+  selectImg.value = idx;
+};
+
 /* 비밀번호 일치 여부 체크 */
 const password = ref("");
 const confirmPassword = ref("");
@@ -20,6 +95,7 @@ const joinForm = ref({
   userName: "",
   userPhone: "",
   birthday: "",
+  img: imgList.value[selectImg.value].value,
 });
 
 const join = async () => {
@@ -55,7 +131,7 @@ const join = async () => {
                     type="email"
                     v-model.trim="joinForm.userId"
                     required
-                    class="block w-full rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 main-color placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+                    class="block w-full border-t-0 border-l-0 border-r-0 border-b-2 px-3 py-2 border-main-color main-color placeholder:text-gray-400 focus:bg-blue-100"
                   />
                 </div>
               </div>
@@ -73,7 +149,7 @@ const join = async () => {
                     v-model="password"
                     required
                     @input="checkPasswordMatch"
-                    class="block w-full rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+                    class="block w-full border-t-0 border-l-0 border-r-0 border-b-2 px-3 py-2 border-main-color main-color placeholder:text-gray-400 focus:bg-blue-100"
                   />
                 </div>
               </div>
@@ -90,7 +166,7 @@ const join = async () => {
                     type="password"
                     v-model="confirmPassword"
                     @input="checkPasswordMatch"
-                    class="block w-full rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+                    class="block w-full border-t-0 border-l-0 border-r-0 border-b-2 px-3 py-2 border-main-color main-color placeholder:text-gray-400 focus:bg-blue-100"
                   />
                 </div>
                 <!-- 비밀번호 일치 여부를 표시하는 메시지 -->
@@ -99,7 +175,7 @@ const join = async () => {
                 </p>
               </div>
             </div>
-            <div class="mt-10">
+            <div class="mt-10 mr-5">
               <div class="w-80 mb-4">
                 <label
                   for="name"
@@ -113,7 +189,7 @@ const join = async () => {
                     type="name"
                     v-model.trim="joinForm.userName"
                     required
-                    class="block w-full rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+                    class="block w-full border-t-0 border-l-0 border-r-0 border-b-2 px-3 py-2 border-main-color main-color placeholder:text-gray-400 focus:bg-blue-100"
                   />
                 </div>
               </div>
@@ -130,7 +206,7 @@ const join = async () => {
                     type="phone"
                     v-model.trim="joinForm.userPhone"
                     required
-                    class="block w-full rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+                    class="block w-full border-t-0 border-l-0 border-r-0 border-b-2 px-3 py-2 border-main-color main-color placeholder:text-gray-400 focus:bg-blue-100"
                   />
                 </div>
               </div>
@@ -147,8 +223,31 @@ const join = async () => {
                     type="date"
                     v-model.trim="joinForm.birthday"
                     required
-                    class="block w-full rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+                    class="block w-full border-t-0 border-l-0 border-r-0 border-b-2 px-3 py-2 border-main-color main-color placeholder:text-gray-400 focus:bg-blue-100"
                   />
+                </div>
+              </div>
+            </div>
+            <div class="mt-10">
+              <div class="w-80 mb-4">
+                <p class="block text-sm font-medium text-gray-900 mb-2">
+                  아바타 설정하기
+                </p>
+                <div class="flex flex-wrap">
+                  <div
+                    v-for="(image, idx) in imgList"
+                    :key="idx"
+                    class="m-1 border-2"
+                    :class="{
+                      'border-main-color': image.select,
+                    }"
+                  >
+                    <img
+                      :src="`${image.value}`"
+                      width="65px"
+                      @click="clickEvent(idx)"
+                    />
+                  </div>
                 </div>
               </div>
             </div>

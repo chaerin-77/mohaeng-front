@@ -20,7 +20,10 @@ const groupList = computed(() => groupStore.groupList);
       <div class="w-3/5">
         <h1 class="text-white text-xl font-semibold mb-6">내 프로필</h1>
         <div class="bg-white rounded-2xl p-5 flex justify-between">
-          <div class="bg-gray-500 h-36 w-28"><img src="" alt="" /></div>
+          <div
+            class="h-28 w-28"
+            :style="`background-image: url(${authStore.user.img}); background-size: cover; background-position: center;`"
+          ></div>
           <div class="w-2/3">
             <p class="font-semibold text-lg text-gray-600">
               {{ user.userName }}

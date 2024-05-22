@@ -81,6 +81,15 @@ export const useGroupStore = defineStore(
         },
       });
       groupList.value = response.data;
+
+      for (const group of groupList.value) {
+        const resp = await groupApi.get("/users", {
+          params: {
+            groupId: group.groupId,
+          },
+        });
+        group.memberList = resp.data;
+      }
     };
 
     const getMemberInfo = async (group) => {

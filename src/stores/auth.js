@@ -94,6 +94,7 @@ export const useAuthStore = defineStore(
           token: token.value,
         })
       );
+      user.value = localUser;
     };
 
     const addMsg = async (content) => {

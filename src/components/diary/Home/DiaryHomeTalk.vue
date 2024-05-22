@@ -13,6 +13,9 @@ const authStore = useAuthStore();
       class="bg-white py-2 px-3 rounded-md mb-3"
     >
       <div class="flex justify-between">
+        <p v-if="chat.userId === authStore.user.id" class="font-semibold mb-2">
+          {{ authStore.user.userName }}
+        </p>
         <p class="font-semibold mb-2">{{ chat.userName }}</p>
         <font-awesome-icon
           v-if="authStore.user.id === chat.userId"

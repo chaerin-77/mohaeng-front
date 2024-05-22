@@ -10,8 +10,8 @@ const user = computed(() => authStore.user);
 
 const props = defineProps({ group: Object });
 const groupStore = useGroupStore();
-groupStore.getMemberInfo(props.group);
-console.log("group: ", props.group);
+// groupStore.getMemberInfo(props.group);
+// console.log("group: ", props.group);
 
 const setting = async () => {
   await groupStore.setCurGroup(props.group);
@@ -33,11 +33,7 @@ const setting = async () => {
       <p class="text-md text-gray-600 mt-2">{{ group.groupName }}</p>
       <p class="text-md text-gray-600 mt-5 flex">
         멤버:
-        <span
-          v-for="member in groupStore.curgroupInfo"
-          :key="member.id"
-          class="ml-2"
-        >
+        <span v-for="member in group.memberList" :key="member.id" class="ml-2">
           {{ member.userName }}
         </span>
       </p>

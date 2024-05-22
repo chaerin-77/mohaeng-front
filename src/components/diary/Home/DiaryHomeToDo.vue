@@ -16,7 +16,11 @@ const addTodo = () => {
 </script>
 
 <template>
-  <div v-for="(todo, idx) in todoStore.todoList" :key="todo.id">
+  <div
+    v-for="(todo, idx) in todoStore.todoList"
+    :key="todo.id"
+    class="h-96 overflow-y-scroll"
+  >
     <div
       class="flex hover:bg-gray-50 py-2 px-3 justify-between"
       @click="changeTodoComplete(idx)"
@@ -44,7 +48,7 @@ const addTodo = () => {
     </div>
   </div>
   <!-- todo 입력 -->
-  <div class="input-group mt-5">
+  <div class="input-group mt-3">
     <input
       type="text"
       class="form-control mr-3 rounded-md"

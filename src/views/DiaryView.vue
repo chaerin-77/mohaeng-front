@@ -189,7 +189,7 @@ const showModal3 = ref(false);
           </div>
         </div>
         <!-- 다이어리 내용 -->
-        <div class="border-2 border-main-color p-5 rounded-xl grid min-h-full">
+        <div class="border-2 border-main-color p-5 rounded-xl">
           <router-view></router-view>
         </div>
       </div>

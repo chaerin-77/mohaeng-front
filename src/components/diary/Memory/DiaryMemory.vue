@@ -62,7 +62,7 @@ const deleteMemory = async (memoryId) => {
         >
       </RouterLink>
     </div>
-    <div class="gap-y-5">
+    <div class="gap-y-5 overflow-y-scroll h-[50rem]">
       <div v-for="item in memoryList" class="bg-gray-100 p-4 mx-5 mb-3">
         <div class="flex justify-between">
           <div class="flex">

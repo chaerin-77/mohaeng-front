@@ -22,7 +22,7 @@ const loading = async () => {
 const getMemberName = () => {
   const userIdToName = {};
   const userIdToImg = {};
-  groupStore.curgroupInfo.forEach((member) => {
+  groupStore.memberList.forEach((member) => {
     userIdToName[member.id] = member.userName;
     userIdToImg[member.id] = member.img;
   });

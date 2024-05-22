@@ -29,6 +29,8 @@ watch(
 const close = () => {
   isOpen.value = false;
   emit("update:modelValue", false);
+  groupStore.addmemberList = [];
+  groupStore.addmemberIntList = [];
 };
 
 onMounted(() => {
@@ -48,8 +50,11 @@ onMounted(() => {
 // 멤버 수정 부분
 import SearchMember from "../group/SearchMember.vue";
 import MemberList from "../group/MemberList.vue";
+import AddList from "../group/AddList.vue";
 import { useGroupStore } from "@/stores/group";
 const groupStore = useGroupStore();
+groupStore.addmemberList = [];
+groupStore.addmemberIntList = [];
 
 const updateMember = async () => {
   if (!confirm("이대로 수정하시겠습니까?")) return;
@@ -89,8 +94,14 @@ const updateMember = async () => {
               <SearchMember />
             </div>
             <div class="w-2/5">
-              <p class="text-sm font-medium text-gray-900">현재 멤버</p>
-              <MemberList />
+              <div>
+                <p class="text-sm font-medium text-gray-900">현재 멤버</p>
+                <MemberList />
+              </div>
+              <div>
+                <p class="text-sm font-medium text-gray-900">추가할 멤버</p>
+                <AddList />
+              </div>
             </div>
           </div>
         </div>

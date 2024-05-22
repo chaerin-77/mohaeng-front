@@ -23,7 +23,7 @@ export const useChatStore = defineStore(
 
     const getMemberName = () => {
       const userIdToName = {};
-      groupStore.curgroupInfo.forEach((member) => {
+      groupStore.memberList.forEach((member) => {
         userIdToName[member.id] = member.userName;
       });
       chatList.value = chatList.value.map((chat) => {

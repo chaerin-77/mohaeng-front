@@ -145,7 +145,7 @@ const showModal3 = ref(false);
           </div>
           <!-- member list -->
           <div
-            v-for="member in groupStore.curgroupInfo"
+            v-for="member in groupStore.memberList"
             class="flex mb-2 justify-between"
           >
             <div class="flex">

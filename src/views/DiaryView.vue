@@ -87,7 +87,10 @@ const showModal3 = ref(false);
         <div
           class="bg-main-color p-4 text-center rounded-xl grid place-items-center mb-5 w-52"
         >
-          <div class="bg-gray-500 h-40 w-32"></div>
+          <div
+            class="bg-gray-500 h-40 w-32"
+            :style="`background-image: url(${user.img}); background-size: cover; background-position: center;`"
+          ></div>
           <p class="text-white mt-4 text-lg">{{ user.userName }}</p>
           <p class="text-white mt-4 text-md font-light">{{ user.message }}</p>
           <div class="mt-20">
@@ -131,6 +134,7 @@ const showModal3 = ref(false);
             <div class="flex">
               <div
                 class="rounded-full border-2 border-white w-12 h-12 mr-2"
+                :style="`background-image: url(${member.img}); background-size: cover; background-position: center;`"
               ></div>
               <p class="text-white m-2 text-md">{{ member.userName }}</p>
             </div>

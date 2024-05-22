@@ -20,7 +20,7 @@ const groupList = computed(() => groupStore.groupList);
       <div class="w-3/5">
         <h1 class="text-white text-xl font-semibold mb-6">내 프로필</h1>
         <div class="bg-white rounded-2xl p-5 flex justify-between">
-          <div class="bg-gray-500 h-36 w-28"></div>
+          <div class="bg-gray-500 h-36 w-28"><img src="" alt="" /></div>
           <div class="w-2/3">
             <p class="font-semibold text-lg text-gray-600">
               {{ user.userName }}
@@ -50,7 +50,10 @@ const groupList = computed(() => groupStore.groupList);
             :key="group.groupId"
             class="text-center mr-3"
           >
-            <div class="rounded-full border-2 border-white w-20 h-20" :style= "`background-image: url(${group.groupImg}); background-size: cover; background-position: center;`"></div>
+            <div
+              class="rounded-full border-2 border-white w-20 h-20"
+              :style="`background-image: url(${group.groupImg}); background-size: cover; background-position: center;`"
+            ></div>
             <p class="text-white text-md mt-3">{{ group.groupName }}</p>
           </div>
           <div class="text-center">

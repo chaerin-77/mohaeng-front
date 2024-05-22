@@ -52,6 +52,39 @@ const showModal3 = ref(false);
         </div>
         <!-- 왼쪽 상단 내 프로필 -->
         <div
+          class="bg-white border border-gray-200 rounded-md flex justify-between p-1 mb-3"
+        >
+          <img src="/src/assets/playcd.gif" alt="" width="25px" height="20px" />
+          <a
+            href="#"
+            class="hover:no-underline hover:text-main-color flex-auto mx-2"
+            @click.prevent="showModal3 = true"
+          >
+            <marquee direction="left" scrollamount="3" class="text-sm">{{
+              groupStore.curgroup.groupMusic
+            }}</marquee>
+          </a>
+          <div>
+            <font-awesome-icon
+              icon="play"
+              class="hover:text-orange-300 h-4 mt-1 mr-2"
+              @click="removeMember(member)"
+            />
+            <font-awesome-icon
+              icon="pause"
+              class="hover:text-orange-300 h-4 mt-1 mr-1"
+              @click="removeMember(member)"
+            />
+          </div>
+        </div>
+        <audio
+          id="myAudio"
+          loop
+          autoplay
+          preload="auto"
+          :src="`/src/assets/musics/${groupStore.curgroup.groupMusic}`"
+        ></audio>
+        <div
           class="bg-main-color p-4 text-center rounded-xl grid place-items-center mb-5 w-52"
         >
           <div class="bg-gray-500 h-40 w-32"></div>
@@ -198,25 +231,7 @@ const showModal3 = ref(false);
       </div>
     </div>
   </div>
-  <div
-    class="bg-main-color p-4 rounded-xl text-left fixed bottom-10 right-10 z-20 grid place-items-center"
-  >
-    <div class="bg-white mb-3 p-1" @click="showModal3 = true">
-      <a href="#" class="hover:no-underline hover:text-black">
-        <marquee direction="left" scrollamount="3" class="text-lg">{{
-          groupStore.curgroup.groupMusic
-        }}</marquee>
-      </a>
-    </div>
-    <audio
-      id="myAudio"
-      loop
-      controls
-      autoplay
-      preload="auto"
-      :src="`/src/assets/musics/${groupStore.curgroup.groupMusic}`"
-    ></audio>
-  </div>
+
   <UpdateDiary v-model="showModal1" />
   <UpdateMember v-model="showModal2" />
   <UpdateMusic v-model="showModal3" />

@@ -3,6 +3,7 @@ import { ref, computed } from "vue";
 import { RouterLink, useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
 import { useGroupStore } from "@/stores/group";
+import groupApi from "@/api/groupApi";
 
 const router = useRouter();
 const authStore = useAuthStore();
@@ -16,6 +17,22 @@ const groupStore = useGroupStore();
 const setting = async () => {
   await groupStore.setCurGroup(props.group);
   router.push({ name: "diaryHome" });
+};
+
+const removeGroup = async (group) => {
+  if (!confirm("정말 삭제하시겠습니까?")) return;
+  await groupApi.delete(
+    "",
+    {
+      params: {
+        groupId: group.groupId,
+      },
+    },
+    {
+      headers: { Authorization: `Bearer ${authStore.token}` },
+    }
+  );
+  groupStore.getGroupList();
 };
 </script>
 
@@ -38,7 +55,7 @@ const setting = async () => {
         </span>
       </p>
     </div>
-    <div class="ml-20">
+    <div class="ml-20 flex flex-col justify-between">
       <a
         href="#"
         @click="setting"
@@ -46,6 +63,13 @@ const setting = async () => {
       >
         다이어리 확인하기 >
       </a>
+      <div class="text-right">
+        <font-awesome-icon
+          icon="fa-regular fa-trash-can"
+          class="text-red-400 w-5 h-5 mt-1 hover:text-gray-400"
+          @click="removeGroup(group)"
+        />
+      </div>
     </div>
   </div>
 </template>

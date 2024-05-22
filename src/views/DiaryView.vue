@@ -176,7 +176,9 @@ const showModal3 = ref(false);
   >
     <div class="bg-white mb-3 p-1" @click="showModal3 = true">
       <a href="#" class="hover:no-underline hover:text-black">
-        <p class="text-lg">{{ groupStore.curgroup.groupMusic }}</p>
+        <marquee direction="left" scrollamount="3" class="text-lg">{{
+          groupStore.curgroup.groupMusic
+        }}</marquee>
       </a>
     </div>
     <audio

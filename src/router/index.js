@@ -145,6 +145,7 @@ router.beforeEach(async (to, from, next) => {
 
   if (to.name === "main") {
     await groupStore.getGroupList(); // 메인 페이지로 이동할 때 실행할 함수
+    await groupStore.getAlarm();
   }
 
   if (to.name === "diaryHome") {
@@ -152,7 +153,6 @@ router.beforeEach(async (to, from, next) => {
     await noticeStore.getNoticeList();
     await todoStore.getTodoList();
     await chatStore.getChatlist();
-    // console.log("beforeEach");
   }
 
   next();

@@ -11,6 +11,7 @@ const user = computed(() => authStore.user);
 const props = defineProps({ group: Object });
 const groupStore = useGroupStore();
 groupStore.getMemberInfo(props.group);
+console.log("group: ", props.group);
 
 const setting = async () => {
   await groupStore.setCurGroup(props.group);

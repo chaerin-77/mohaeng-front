@@ -21,14 +21,17 @@ const loading = async () => {
 
 const getMemberName = () => {
   const userIdToName = {};
+  const userIdToImg = {};
   groupStore.curgroupInfo.forEach((member) => {
     userIdToName[member.id] = member.userName;
+    userIdToImg[member.id] = member.img;
   });
 
   memoryList.value = memoryList.value.map((memory) => {
     const userName = userIdToName[memory.userId];
+    const userImg = userIdToImg[memory.userId];
 
-    return { ...memory, userName };
+    return { ...memory, userName, userImg };
   });
 };
 loading();
@@ -63,7 +66,10 @@ const deleteMemory = async (memoryId) => {
       <div v-for="item in memoryList" class="bg-gray-100 p-4 mx-5 mb-3">
         <div class="flex justify-between">
           <div class="flex">
-            <div class="bg-gray-500 w-10 h-12"></div>
+            <div
+              class="w-10 h-12"
+              :style="`background-image: url(${item.userImg}); background-size: cover; background-position: center;`"
+            ></div>
             <div class="ml-3">
               <p v-if="item.userId === authStore.user.id" class="font-semibold">
                 {{ authStore.user.userName }}
@@ -80,8 +86,8 @@ const deleteMemory = async (memoryId) => {
           />
         </div>
         <hr class="my-4" />
-        <div class="text-center grid place-items-center">
-          <div height="500px"><img height="100px" :src="item.img" /></div>
+        <div class="text-center grid place-items-center gap-y-5">
+          <div><img width="400px" :src="item.img" /></div>
           {{ item.content }}
         </div>
       </div>

@@ -1,6 +1,7 @@
 <script setup>
 import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
+import { useGroupStore } from "@/stores/group";
 import { ref } from "vue";
 import Alarm from "./user/Alarm.vue";
 
@@ -8,10 +9,12 @@ const showModal = ref(false);
 
 const router = useRouter();
 const authStore = useAuthStore();
+const groupStore = useGroupStore();
 const { logout } = authStore;
 const userlogout = () => {
   logout();
 };
+console.log("alarm: ", groupStore.alarmList);
 </script>
 
 <template>
@@ -27,6 +30,10 @@ const userlogout = () => {
           <ul class="flex items-center space-x-10">
             <li>
               <a href="#" class="text-gray-600" @click="showModal = true">
+                <div
+                  v-if="groupStore.alarmList.length > 0"
+                  class="rounded-full bg-red-500 w-2 h-2 absolute ml-2"
+                ></div>
                 <font-awesome-icon icon="bell" class="mr-1" /> 알림
               </a>
             </li>

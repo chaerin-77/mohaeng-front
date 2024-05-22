@@ -44,6 +44,13 @@ onMounted(() => {
     document.removeEventListener("keydown", onEscape);
   });
 });
+
+import { useGroupStore } from "@/stores/group";
+const groupStore = useGroupStore();
+const checkAlarm = async () => {
+  await groupStore.checkAlarm();
+  close();
+};
 </script>
 <template>
   <div
@@ -59,27 +66,31 @@ onMounted(() => {
         <div class="pb-4 flex justify-between font-medium border-b">
           <p class="text-xl font-semibold text-gray-500">알림</p>
           <div
-            @click="close"
+            @click="checkAlarm"
             class="text-2xl hover:text-gray-600 cursor-pointer"
           >
             &#215;
           </div>
         </div>
         <div class="my-4">
-          <div class="flex text-gray-500 px-12 py-4 hover:bg-blue-100">
+          <div
+            v-for="group in groupStore.alarmList"
+            :key="group.groupId"
+            class="flex text-gray-500 px-12 py-4 hover:bg-blue-100"
+          >
             <font-awesome-icon
               icon="fa-regular fa-bell"
               class="w-6 h-6 mr-10"
             />
             <div class="text-center">
               <p>새로운 모임에 초대되었어요!</p>
-              <p>모임 명: 여은파</p>
+              <p>모임 명: {{ group.groupName }}</p>
             </div>
           </div>
         </div>
         <div class="text-center mt-5">
           <button
-            @click="close"
+            @click="checkAlarm"
             class="px-4 py-2 text-sm text-white bg-main-color rounded-md focus:outline-none hover:text-black"
           >
             확인

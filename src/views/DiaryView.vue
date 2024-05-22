@@ -57,7 +57,7 @@ const showModal3 = ref(false);
 </script>
 
 <template>
-  <div class="container pt-14">
+  <div class="container py-14">
     <div class="flex">
       <!--왼쪽 사이드 바-->
       <div class="text-center w-56 mt-2">
@@ -189,7 +189,7 @@ const showModal3 = ref(false);
           </div>
         </div>
         <!-- 다이어리 내용 -->
-        <div class="border-2 border-main-color p-5 rounded-xl grid">
+        <div class="border-2 border-main-color p-5 rounded-xl grid min-h-full">
           <router-view></router-view>
         </div>
       </div>

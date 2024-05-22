@@ -14,6 +14,7 @@ export const useGroupStore = defineStore(
     const groupList = ref([]);
     const curgroup = ref({});
     const curgroupInfo = ref([]);
+    const alarmList = ref([]);
 
     const findUser = async (word) => {
       const response = await authApi.get("/search", {
@@ -140,12 +141,31 @@ export const useGroupStore = defineStore(
       setCurGroup(curgroup.value);
     };
 
+    const getAlarm = async () => {
+      const response = await groupApi.get("/alarm", {
+        params: {
+          userId: authStore.user.id,
+        },
+      });
+      alarmList.value = response.data;
+    };
+
+    const checkAlarm = async () => {
+      const response = await groupApi.delete("/alarm", {
+        params: {
+          userId: authStore.user.id,
+        },
+      });
+      alarmList.value = [];
+    };
+
     return {
       searchList,
       memberList,
       groupList,
       curgroup,
       curgroupInfo,
+      alarmList,
       findUser,
       addMember,
       removeMember,
@@ -156,6 +176,8 @@ export const useGroupStore = defineStore(
       update,
       updateMember,
       setMusic,
+      getAlarm,
+      checkAlarm,
     };
   },
   { persist: { storage: sessionStorage } }

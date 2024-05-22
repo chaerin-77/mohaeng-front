@@ -252,10 +252,18 @@ const showModal3 = ref(false);
       </div>
     </div>
   </div>
-
   <UpdateDiary v-model="showModal1" />
   <UpdateMember v-model="showModal2" />
   <UpdateMusic v-model="showModal3" />
+  <div
+    class="absolute z-10 rounded-full w-[4rem] h-5 bg-white border-2 border-main-color left-[24.5rem] top-[21rem]"
+  ></div>
+  <div
+    class="absolute z-10 rounded-full w-[4rem] h-5 bg-white border-2 border-main-color left-[24.5rem] top-[29rem]"
+  ></div>
+  <div
+    class="absolute z-10 rounded-full w-[4rem] h-5 bg-white border-2 border-main-color left-[24.5rem] top-[37rem]"
+  ></div>
 </template>
 
 <style scoped></style>

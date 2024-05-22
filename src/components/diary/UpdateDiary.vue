@@ -80,7 +80,6 @@ const updateDiary = async () => {
   if (response.ok) {
     const data = await response.json();
     diaryForm.value.groupImg = data.data.url;
-    
   }
   try {
     await groupStore.update(diaryForm.value);
@@ -94,7 +93,7 @@ const updateDiary = async () => {
 <template>
   <div
     v-if="isOpen"
-    class="fixed w-full h-full top-0 left-0 flex items-center justify-center z-10"
+    class="fixed w-full h-full top-0 left-0 flex items-center justify-center z-20"
   >
     <div
       class="absolute w-full h-full bg-gray-900 opacity-50"

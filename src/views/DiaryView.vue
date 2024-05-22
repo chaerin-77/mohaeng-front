@@ -181,6 +181,7 @@ const showModal3 = ref(false);
     </div>
     <audio
       id="myAudio"
+      loop
       controls
       autoplay
       preload="auto"

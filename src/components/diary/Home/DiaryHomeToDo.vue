@@ -16,35 +16,33 @@ const addTodo = () => {
 </script>
 
 <template>
-  <div
-    v-for="(todo, idx) in todoStore.todoList"
-    :key="todo.id"
-    class="h-96 overflow-y-scroll"
-  >
-    <div
-      class="flex hover:bg-gray-50 py-2 px-3 justify-between"
-      @click="changeTodoComplete(idx)"
-    >
-      <div class="flex">
+  <div class="h-96 overflow-y-scroll">
+    <div v-for="(todo, idx) in todoStore.todoList" :key="todo.id">
+      <div
+        class="flex hover:bg-gray-50 py-2 px-3 justify-between"
+        @click="changeTodoComplete(idx)"
+      >
+        <div class="flex">
+          <font-awesome-icon
+            v-if="todo.checked"
+            icon="square-check"
+            class="w-5 h-5 mt-1"
+          />
+          <font-awesome-icon
+            v-else
+            icon="fa-regular fa-square"
+            class="w-5 h-5 mt-1"
+          />
+          <p :class="{ 'line-through': todo.checked }" class="pl-20 text-lg">
+            {{ todo.content }}
+          </p>
+        </div>
         <font-awesome-icon
-          v-if="todo.checked"
-          icon="square-check"
-          class="w-5 h-5 mt-1"
+          icon="fa-regular fa-trash-can"
+          class="text-red-400 w-5 h-5 mt-1 hover:text-gray-400"
+          @click="removeTodo(todo.todoId)"
         />
-        <font-awesome-icon
-          v-else
-          icon="fa-regular fa-square"
-          class="w-5 h-5 mt-1"
-        />
-        <p :class="{ 'line-through': todo.checked }" class="pl-20 text-lg">
-          {{ todo.content }}
-        </p>
       </div>
-      <font-awesome-icon
-        icon="fa-regular fa-trash-can"
-        class="text-red-400 w-5 h-5 mt-1 hover:text-gray-400"
-        @click="removeTodo(todo.todoId)"
-      />
     </div>
   </div>
   <!-- todo 입력 -->

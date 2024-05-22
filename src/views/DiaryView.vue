@@ -6,6 +6,7 @@ import UpdateMember from "@/components/diary/UpdateMember.vue";
 import UpdateMusic from "@/components/diary/UpdateMusic.vue";
 import { useAuthStore } from "@/stores/auth";
 import { useGroupStore } from "@/stores/group";
+import groupApi from "@/api/groupApi";
 
 const route = useRoute();
 
@@ -15,9 +16,23 @@ const groupStore = useGroupStore();
 const groupList = computed(() => groupStore.groupList);
 const group = computed(() => groupStore.curgroup);
 groupStore.getMemberInfo(groupStore.curgroup);
-
-const myAudio = document.getElementById("myAudio"); // Audio객체 취득
-console.log("audio: ", myAudio);
+const removeMember = async (member) => {
+  if (!confirm("삭제하시겠습니까?")) return;
+  groupStore.removeMember(member);
+  const response = await groupApi.delete(
+    "/users",
+    {
+      params: {
+        groupId: groupStore.curgroup.groupId,
+        userId: member.id,
+      },
+    },
+    {
+      headers: { Authorization: `Bearer ${authStore.token}` },
+    }
+  );
+  groupStore.getMemberInfo(groupStore.curgroup);
+};
 
 const showModal1 = ref(false);
 const showModal2 = ref(false);
@@ -72,15 +87,27 @@ const showModal3 = ref(false);
               href="#"
               @click="showModal2 = true"
               class="text-white underline text-sm mt-1"
-              >수정</a
+              >추가</a
             >
           </div>
           <!-- member list -->
-          <div v-for="member in groupStore.curgroupInfo" class="flex mb-2">
-            <div
-              class="rounded-full border-2 border-white w-12 h-12 mr-2"
-            ></div>
-            <p class="text-white m-2 text-md">{{ member.userName }}</p>
+          <div
+            v-for="member in groupStore.curgroupInfo"
+            class="flex mb-2 justify-between"
+          >
+            <div class="flex">
+              <div
+                class="rounded-full border-2 border-white w-12 h-12 mr-2"
+              ></div>
+              <p class="text-white m-2 text-md">{{ member.userName }}</p>
+            </div>
+            <a href="#">
+              <font-awesome-icon
+                icon="circle-minus"
+                class="text-white hover:text-orange-300 h-4 mt-2"
+                @click="removeMember(member)"
+              />
+            </a>
           </div>
         </div>
       </div>

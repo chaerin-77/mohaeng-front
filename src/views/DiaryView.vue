@@ -16,6 +16,9 @@ const groupList = computed(() => groupStore.groupList);
 const group = computed(() => groupStore.curgroup);
 groupStore.getMemberInfo(groupStore.curgroup);
 
+const myAudio = document.getElementById("myAudio"); // Audio객체 취득
+console.log("audio: ", myAudio);
+
 const showModal1 = ref(false);
 const showModal2 = ref(false);
 const showModal3 = ref(false);
@@ -176,16 +179,13 @@ const showModal3 = ref(false);
         <p class="text-lg">{{ groupStore.curgroup.groupMusic }}</p>
       </a>
     </div>
-    <audio controls autoplay>
-      <source
-        :src="require(`../assets/musics/${groupStore.curgroup.groupMusic}`)"
-        type="audio/mpeg"
-      />
-    </audio>
-    <div class="flex">
-      <font-awesome-icon icon="play" class="text-white" />
-      <font-awesome-icon icon="stop" class="text-white ml-3" />
-    </div>
+    <audio
+      id="myAudio"
+      controls
+      autoplay
+      preload="auto"
+      :src="`/src/assets/musics/${groupStore.curgroup.groupMusic}`"
+    ></audio>
   </div>
   <UpdateDiary v-model="showModal1" />
   <UpdateMember v-model="showModal2" />

@@ -88,17 +88,9 @@ const setMusic = async () => {
                 required
                 class="block w-full rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 main-color placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
               >
-                <option value="Bulbasound_-_Meditation.mp3">
-                  Bulbasound_-_Meditation.mp3
-                </option>
-                <option value="Carlos_Estella_-_Epic_Uplifting_Inspiration.mp3">
-                  Carlos_Estella_-_Epic_Uplifting_Inspiration
-                </option>
-                <option
-                  value="OnClassical_-_alessandro_deljavan_bach_little_preludes_and_wtc_alternative_versions_01_clavier_buechlein_vor_wh._f._bach_no._1_applicatio_bwv_.mp3"
-                >
-                  OnClassical_-_alessandro_deljavan_bach_little_preludes_and_wtc_alternative_versions_01_clavier_buechlein_vor_wh._f._bach_no._1_applicatio_bwv_
-                </option>
+                <option value="music1.mp3">music1</option>
+                <option value="music2.mp3">music2</option>
+                <option value="music3.mp3">music3</option>
               </select>
             </div>
           </div>

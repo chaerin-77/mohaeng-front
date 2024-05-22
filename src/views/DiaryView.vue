@@ -74,7 +74,7 @@ const showModal3 = ref(false);
           <img src="/src/assets/playcd.gif" alt="" width="25px" height="20px" />
           <a
             href="#"
-            class="hover:no-underline hover:text-main-color flex-auto mx-2"
+            class="hover:no-underline hover:text-main-color w-1/2 mx-2"
             @click.prevent="showModal3 = true"
           >
             <marquee direction="left" scrollamount="3" class="text-sm">{{

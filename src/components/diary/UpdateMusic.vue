@@ -105,13 +105,11 @@ const setMusic = async () => {
                 <option value="So Sweet - Lish Grooves.mp3">
                   So Sweet - Lish Grooves
                 </option>
-                <option
-                  value="Summer Solstice on the June Planet - Bail Bonds.mp3"
-                >
-                  Summer Solstice on the June Planet - Bail Bonds
+                <option value="Summer Solstice on the June Planet.mp3">
+                  Summer Solstice on the June Planet
                 </option>
-                <option value="Summer Somewhere In Cuba - Cumbia Deli.mp3">
-                  Summer Somewhere In Cuba - Cumbia Deli
+                <option value="Summer Somewhere In Cuba.mp3">
+                  Summer Somewhere In Cuba
                 </option>
                 <option value="The Rainy Road - Lish Grooves.mp3">
                   The Rainy Road - Lish Grooves

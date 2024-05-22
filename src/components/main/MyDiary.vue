@@ -1,15 +1,21 @@
 <script setup>
 import { ref, computed } from "vue";
-import { RouterLink } from "vue-router";
+import { RouterLink, useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
 import { useGroupStore } from "@/stores/group";
 
+const router = useRouter();
 const authStore = useAuthStore();
 const user = computed(() => authStore.user);
 
 const props = defineProps({ group: Object });
 const groupStore = useGroupStore();
 groupStore.getMemberInfo(props.group);
+
+const setting = async () => {
+  await groupStore.setCurGroup(props.group);
+  router.push({ name: "diaryHome" });
+};
 </script>
 
 <template>
@@ -36,13 +42,13 @@ groupStore.getMemberInfo(props.group);
       </p>
     </div>
     <div class="ml-20">
-      <RouterLink
-        @click="groupStore.setCurGroup(group)"
-        :to="{ name: 'diaryHome' }"
+      <a
+        href="#"
+        @click="setting"
         class="text-main-color font-semibold hover:no-underline"
       >
         다이어리 확인하기 >
-      </RouterLink>
+      </a>
     </div>
   </div>
 </template>

@@ -88,9 +88,34 @@ const setMusic = async () => {
                 required
                 class="block w-full rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 main-color placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
               >
-                <option value="music1.mp3">music1</option>
-                <option value="music2.mp3">music2</option>
-                <option value="music3.mp3">music3</option>
+                <option value="A Year Ago.mp3">A Year Ago</option>
+                <option value="Always Be My Unicorn.mp3">
+                  Always Be My Unicorn
+                </option>
+                <option value="Bulbasound.mp3">Bulbasound</option>
+                <option value="Good Days.mp3">Good Days</option>
+                <option value="Handcrafted.mp3">Handcrafted</option>
+                <option value="Night Run Away.mp3">Night Run Away</option>
+                <option value="Reason_to_Stay_(feat._undy).mp3">
+                  Reason_to_Stay_(feat._undy)
+                </option>
+                <option value="Serenity - Lish Grooves.mp3">
+                  Serenity - Lish Grooves
+                </option>
+                <option value="So Sweet - Lish Grooves.mp3">
+                  So Sweet - Lish Grooves
+                </option>
+                <option
+                  value="Summer Solstice on the June Planet - Bail Bonds.mp3"
+                >
+                  Summer Solstice on the June Planet - Bail Bonds
+                </option>
+                <option value="Summer Somewhere In Cuba - Cumbia Deli.mp3">
+                  Summer Somewhere In Cuba - Cumbia Deli
+                </option>
+                <option value="The Rainy Road - Lish Grooves.mp3">
+                  The Rainy Road - Lish Grooves
+                </option>
               </select>
             </div>
           </div>

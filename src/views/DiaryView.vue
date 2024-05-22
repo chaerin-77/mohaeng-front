@@ -34,6 +34,23 @@ const removeMember = async (member) => {
   groupStore.getMemberInfo(groupStore.curgroup);
 };
 
+// 오디오 요소에 대한 ref
+const audioElement = ref(null);
+
+// 오디오를 재생하는 함수
+const playAudio = () => {
+  if (audioElement.value) {
+    audioElement.value.play();
+  }
+};
+
+// 오디오를 일시 정지하는 함수
+const pauseAudio = () => {
+  if (audioElement.value) {
+    audioElement.value.pause();
+  }
+};
+
 const showModal1 = ref(false);
 const showModal2 = ref(false);
 const showModal3 = ref(false);
@@ -68,17 +85,17 @@ const showModal3 = ref(false);
             <font-awesome-icon
               icon="play"
               class="hover:text-orange-300 h-4 mt-1 mr-2"
-              @click="removeMember(member)"
+              @click="playAudio"
             />
             <font-awesome-icon
               icon="pause"
               class="hover:text-orange-300 h-4 mt-1 mr-1"
-              @click="removeMember(member)"
+              @click="pauseAudio"
             />
           </div>
         </div>
         <audio
-          id="myAudio"
+          ref="audioElement"
           loop
           autoplay
           preload="auto"

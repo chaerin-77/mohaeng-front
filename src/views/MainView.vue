@@ -12,6 +12,7 @@ const authStore = useAuthStore();
 const user = computed(() => authStore.user);
 const groupStore = useGroupStore();
 const groupList = computed(() => groupStore.groupList);
+console.log(groupList);
 
 const typedText = ref("");
 const txt = "<모>여서 여<행>?\n<모>이면 <행>복!";
@@ -116,6 +117,20 @@ onMounted(() => {
   <div class="container pt-20">
     <p class="text-gray-500 text-xl font-semibold mb-5">나의 다이어리</p>
     <div class="flex justify-between flex-wrap gap-y-5">
+      <div
+        v-if="groupList.length < 1"
+        class="w-full mb-4 py-5 border border-gray-500 rounded-xl shadow-md text-center grid place-items-center"
+      >
+        <p class="text-lg">아직 모임이 없어요!</p>
+        <p class="mb-4 text-lg">모임을 만들어보세요</p>
+        <RouterLink :to="{ name: 'invite' }">
+          <div
+            class="hover:shadow-xl rounded-full bg-orange-300 w-20 h-20 pt-4"
+          >
+            <font-awesome-icon icon="plus" style="color: white" size="2xl" />
+          </div>
+        </RouterLink>
+      </div>
       <MyDiary
         v-for="group in groupList"
         :key="group.groupId"

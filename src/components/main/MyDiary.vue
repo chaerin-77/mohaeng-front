@@ -21,24 +21,19 @@ const setting = async () => {
 
 const removeGroup = async (group) => {
   if (!confirm("정말 삭제하시겠습니까?")) return;
-  await groupApi.delete(
-    "",
-    {
-      params: {
-        groupId: group.groupId,
-      },
+  await groupApi.delete("", {
+    params: {
+      groupId: group.groupId,
     },
-    {
-      headers: { Authorization: `Bearer ${authStore.token}` },
-    }
-  );
+    headers: { Authorization: `Bearer ${authStore.token}` },
+  });
   groupStore.getGroupList();
 };
 </script>
 
 <template>
   <div
-    class="relative flex mb-4 p-5 border border-gray-500 rounded-xl shadow-md"
+    class="relative flex flex-wrap mb-4 p-5 border border-gray-500 rounded-xl shadow-md"
   >
     <div
       class="h-48 w-36 ml-4"
@@ -50,7 +45,7 @@ const removeGroup = async (group) => {
         {{ group.startDate }} ~ {{ group.endDate }}
       </p>
       <p class="text-md text-gray-600 mt-2">{{ group.groupName }}</p>
-      <p class="text-md text-gray-600 mt-5 flex">
+      <p class="text-md text-gray-600 mt-5 w-52 flex flex-wrap">
         멤버:
         <span v-for="member in group.memberList" :key="member.id" class="ml-2">
           {{ member.userName }}

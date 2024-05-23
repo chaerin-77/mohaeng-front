@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from "vue";
-import { RouterView, RouterLink, useRoute } from "vue-router";
+import { RouterView, RouterLink, useRoute, useRouter } from "vue-router";
 import UpdateDiary from "@/components/diary/UpdateDiary.vue";
 import UpdateMember from "@/components/diary/UpdateMember.vue";
 import UpdateMusic from "@/components/diary/UpdateMusic.vue";
@@ -9,6 +9,7 @@ import { useGroupStore } from "@/stores/group";
 import groupApi from "@/api/groupApi";
 
 const route = useRoute();
+const router = useRouter();
 
 const authStore = useAuthStore();
 const user = computed(() => authStore.user);
@@ -44,6 +45,11 @@ const pauseAudio = () => {
   if (audioElement.value) {
     audioElement.value.pause();
   }
+};
+
+const setting = async (group) => {
+  await groupStore.setCurGroup(group);
+  window.location.reload(true);
 };
 
 const showModal1 = ref(false);
@@ -113,6 +119,7 @@ const showModal3 = ref(false);
                 :key="othergroup.groupId"
                 class="rounded-full border-2 border-white w-12 h-12"
                 :style="`background-image: url(${othergroup.groupImg}); background-size: cover; background-position: center;`"
+                @click="setting(othergroup)"
               ></div>
               <RouterLink :to="{ name: 'invite' }"
                 ><div

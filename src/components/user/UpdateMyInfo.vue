@@ -109,6 +109,7 @@ const deleteUser = async () => {
       params: {
         id: user.id,
       },
+      headers: { Authorization: `Bearer ${authStore.token}` },
     });
     authStore.logout();
     router.push({ name: "login" });

@@ -65,3 +65,10 @@
   font-weight: 900;
   font-style: normal;
 }
+
+@font-face {
+  font-family: "harubang";
+  src: url("@/assets/fonts/123RF_하르방_R_TTF.ttf");
+  font-weight: 500;
+  font-style: normal;
+}

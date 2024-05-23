@@ -119,14 +119,11 @@ const update = async () => {
               >아이디</label
             >
             <div class="mt-2">
-              <input
-                id="email"
-                name="email"
-                type="email"
-                v-model.trim="updateForm.userId"
-                readonly
-                class="block w-96 rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 main-color placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
-              />
+              <input id="email" name="email" type="email"
+              v-model.trim="updateForm.userId" readonly class="block w-full
+              border-t-0 border-l-0 border-r-0 border-b-2 px-3 py-2
+              border-main-color main-color placeholder:text-gray-400
+              focus:bg-blue-100"
             </div>
           </div>
           <div class="mb-4 flex place-items-center">
@@ -142,7 +139,7 @@ const update = async () => {
                 type="name"
                 v-model.trim="updateForm.userName"
                 required
-                class="block w-96 rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+                class="block w-full border-t-0 border-l-0 border-r-0 border-b-2 px-3 py-2 border-main-color main-color placeholder:text-gray-400 focus:bg-blue-100"
               />
             </div>
           </div>
@@ -159,7 +156,7 @@ const update = async () => {
                 type="phone"
                 v-model.trim="updateForm.userPhone"
                 required
-                class="block w-96 rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+                class="block w-full border-t-0 border-l-0 border-r-0 border-b-2 px-3 py-2 border-main-color main-color placeholder:text-gray-400 focus:bg-blue-100"
               />
             </div>
           </div>
@@ -176,7 +173,7 @@ const update = async () => {
                 type="date"
                 v-model.trim="updateForm.birthday"
                 required
-                class="block w-96 rounded-md border-2 pl-3 pr-3 border-main-color py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+                class="block w-full border-t-0 border-l-0 border-r-0 border-b-2 px-3 py-2 border-main-color main-color placeholder:text-gray-400 focus:bg-blue-100"
               />
             </div>
           </div>

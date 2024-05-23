@@ -70,7 +70,7 @@ const updateDiary = async () => {
 
   formData.append("image", file);
   const response = await fetch(
-    "https://api.imgbb.com/1/upload?key=" + "02e43c8ec4af37cb23733f977ea04dca",
+    "https://api.imgbb.com/1/upload?key=02e43c8ec4af37cb23733f977ea04dca",
     {
       method: "POST",
       body: formData,

@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
+import authApi from "@/api/authApi";
 const authStore = useAuthStore();
 const router = useRouter();
 
@@ -80,6 +81,25 @@ const clickEvent = (idx) => {
   selectImg.value = idx;
 };
 
+/* 아이디 중복 체크 */
+const email = ref("");
+const emailDuplication = ref(true);
+const checkId = async () => {
+  await authApi
+    .get("/checkid", {
+      params: {
+        inputId: email.value,
+      },
+    })
+    .then((res) => {
+      res.data;
+      emailDuplication.value = true;
+    })
+    .catch((err) => {
+      emailDuplication.value = false;
+    });
+};
+
 /* 비밀번호 일치 여부 체크 */
 const password = ref("");
 const confirmPassword = ref("");
@@ -90,7 +110,7 @@ const checkPasswordMatch = () => {
 };
 
 const joinForm = ref({
-  userId: "",
+  userId: email,
   userPwd: password,
   userName: "",
   userPhone: "",
@@ -129,11 +149,17 @@ const join = async () => {
                     id="email"
                     name="email"
                     type="email"
-                    v-model.trim="joinForm.userId"
+                    v-model.trim="email"
+                    @blur="checkId"
+                    @keyup.enter="checkId"
                     required
                     class="block w-full border-t-0 border-l-0 border-r-0 border-b-2 px-3 py-2 border-main-color main-color placeholder:text-gray-400 focus:bg-blue-100"
                   />
                 </div>
+                <!-- 아이디 중복 여부를 표시하는 메시지 -->
+                <p v-if="!emailDuplication" class="text-red-500 text-xs mt-1">
+                  사용할 수 없는 아이디입니다.
+                </p>
               </div>
               <div class="w-80 mb-4">
                 <label

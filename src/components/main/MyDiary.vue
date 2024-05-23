@@ -37,9 +37,11 @@ const removeGroup = async (group) => {
 </script>
 
 <template>
-  <div class="flex mb-4 p-5 border border-gray-500 rounded-xl shadow-md">
+  <div
+    class="relative flex mb-4 p-5 border border-gray-500 rounded-xl shadow-md"
+  >
     <div
-      class="h-48 w-36"
+      class="h-48 w-36 ml-4"
       :style="`background-image: url(${group.groupImg}); background-size: cover; background-position: center;`"
     ></div>
     <div class="ml-10">
@@ -71,6 +73,15 @@ const removeGroup = async (group) => {
         />
       </div>
     </div>
+    <div
+      class="absolute z-10 rounded-full w-5 h-5 bg-white border-2 border-gray-300 left-[1.5rem] top-[4rem] shadow-inner"
+    ></div>
+    <div
+      class="absolute z-10 rounded-full w-5 h-5 bg-white border-2 border-gray-300 left-[1.5rem] top-[8rem] shadow-inner"
+    ></div>
+    <div
+      class="absolute z-10 rounded-full w-5 h-5 bg-white border-2 border-gray-300 left-[1.5rem] top-[12rem] shadow-inner"
+    ></div>
   </div>
 </template>
 

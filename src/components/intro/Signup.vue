@@ -73,11 +73,12 @@ const imgList = ref([
   },
 ]);
 
-const selectImg = ref(1);
+const selectImg = ref(0);
 const clickEvent = (idx) => {
   imgList.value[selectImg.value].select = false;
   imgList.value[idx].select = true;
   selectImg.value = idx;
+  joinForm.value.img = imgList.value[selectImg.value].value;
 };
 
 /* 아이디 중복 체크 */
@@ -114,7 +115,7 @@ const joinForm = ref({
   userName: "",
   userPhone: "",
   birthday: "",
-  img: imgList.value[selectImg.value].value,
+  img: "",
 });
 
 const join = async () => {

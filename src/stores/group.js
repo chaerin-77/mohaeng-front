@@ -132,6 +132,7 @@ export const useGroupStore = defineStore(
       const response = await groupApi.put("/users", obj, {
         headers: { Authorization: `Bearer ${authStore.token}` },
       });
+      searchList.value = [];
       addmemberList.value = [];
       addmemberIntList.value = [];
       getMemberInfo(curgroup.value);

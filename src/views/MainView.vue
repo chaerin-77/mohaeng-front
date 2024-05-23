@@ -48,12 +48,12 @@ onMounted(() => {
     "
   >
     <div class="bg-black bg-opacity-30 py-20">
-      <div class="container flex justify-between px-32">
+      <div class="container flex justify-between px-36">
         <p
           v-html="typedText"
-          class="text-white font-bold text-8xl p-5"
+          class="text-white text-8xl p-5 font-[harubang] mt-4"
           style="
-            line-height: 150%;
+            line-height: 130%;
             text-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
           "
         ></p>

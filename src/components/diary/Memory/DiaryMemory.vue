@@ -37,17 +37,12 @@ const getMemberName = () => {
 loading();
 
 const deleteMemory = async (memoryId) => {
-  const response = await memoryApi.delete(
-    "",
-    {
-      params: {
-        memoryId,
-      },
+  const response = await memoryApi.delete("", {
+    params: {
+      memoryId,
     },
-    {
-      headers: { Authorization: `Bearer ${authStore.token}` },
-    }
-  );
+    headers: { Authorization: `Bearer ${authStore.token}` },
+  });
   window.location.reload(true);
 };
 </script>

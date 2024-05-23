@@ -28,7 +28,7 @@ export const useGroupStore = defineStore(
       const filteredUsers = ref([]);
       filteredUsers.value = response.data.filter(
         (user) =>
-          !memberList.value.some((member) => member.userId === user.userId)
+          !addmemberList.value.some((member) => member.userId === user.userId)
       );
 
       // 나 자신을 검색하지 않도록
@@ -52,11 +52,6 @@ export const useGroupStore = defineStore(
     };
 
     const removeMember = (user) => {
-      // memberList.value = memberList.value.filter(
-      //   (member) => member.userId !== user.userId
-      // );
-      // memberIntList.value = memberIntList.value.filter((id) => id !== user.id);
-
       addmemberList.value = addmemberList.value.filter(
         (member) => member.userId !== user.userId
       );
@@ -80,8 +75,6 @@ export const useGroupStore = defineStore(
         headers: { Authorization: `Bearer ${authStore.token}` },
       });
       searchList.value = [];
-      // memberList.value = [];
-      // memberIntList.value = [];
       addmemberList.value = [];
       addmemberIntList.value = [];
     };
@@ -172,6 +165,9 @@ export const useGroupStore = defineStore(
       const response = await groupApi.delete("/alarm", {
         params: {
           userId: authStore.user.id,
+        },
+        headers: {
+          Authorization: `Bearer ${authStore.token}`,
         },
       });
       alarmList.value = [];

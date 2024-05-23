@@ -54,7 +54,7 @@ onMounted(() => {
           class="text-white text-8xl p-5 font-[harubang] mt-4"
           style="
             line-height: 130%;
-            text-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+            text-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);
           "
         ></p>
         <div class="w-2/5 bg-white shadow-lg border rounded-2xl p-5">

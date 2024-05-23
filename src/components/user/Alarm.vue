@@ -48,7 +48,9 @@ onMounted(() => {
 import { useGroupStore } from "@/stores/group";
 const groupStore = useGroupStore();
 const checkAlarm = async () => {
-  await groupStore.checkAlarm();
+  if (groupStore.alarmList.length > 0) {
+    await groupStore.checkAlarm();
+  }
   close();
 };
 </script>

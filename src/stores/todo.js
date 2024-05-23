@@ -39,17 +39,12 @@ export const useTodoStore = defineStore(
     };
 
     const removeTodo = async (id) => {
-      const response = await todoApi.delete(
-        "",
-        {
-          params: {
-            todoId: id,
-          },
+      const response = await todoApi.delete("", {
+        params: {
+          todoId: id,
         },
-        {
-          headers: { Authorization: `Bearer ${authStore.token}` },
-        }
-      );
+        headers: { Authorization: `Bearer ${authStore.token}` },
+      });
       getTodoList();
     };
 

@@ -29,17 +29,12 @@ export const useNoticeStore = defineStore(
     };
 
     const removeNotice = async (id) => {
-      const response = await noticeApi.delete(
-        "",
-        {
-          params: {
-            noticeId: id,
-          },
+      const response = await noticeApi.delete("", {
+        params: {
+          noticeId: id,
         },
-        {
-          headers: { Authorization: `Bearer ${authStore.token}` },
-        }
-      );
+        headers: { Authorization: `Bearer ${authStore.token}` },
+      });
       getNoticeList();
     };
 

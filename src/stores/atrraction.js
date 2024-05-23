@@ -59,17 +59,12 @@ export const useAttractionStore = defineStore(
     };
 
     const deletePlan = async (planId) => {
-      const response = await attractionApi.delete(
-        "",
-        {
-          params: {
-            planId,
-          },
+      const response = await attractionApi.delete("", {
+        params: {
+          planId,
         },
-        {
-          headers: { Authorization: `Bearer ${authStore.token}` },
-        }
-      );
+        headers: { Authorization: `Bearer ${authStore.token}` },
+      });
       getPlan();
     };
 

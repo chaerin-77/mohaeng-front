@@ -19,18 +19,13 @@ groupStore.getMemberInfo(groupStore.curgroup);
 const removeMember = async (member) => {
   if (!confirm("삭제하시겠습니까?")) return;
   groupStore.removeMember(member);
-  const response = await groupApi.delete(
-    "/users",
-    {
-      params: {
-        groupId: groupStore.curgroup.groupId,
-        userId: member.id,
-      },
+  const response = await groupApi.delete("/users", {
+    params: {
+      groupId: groupStore.curgroup.groupId,
+      userId: member.id,
     },
-    {
-      headers: { Authorization: `Bearer ${authStore.token}` },
-    }
-  );
+    headers: { Authorization: `Bearer ${authStore.token}` },
+  });
   groupStore.getMemberInfo(groupStore.curgroup);
 };
 

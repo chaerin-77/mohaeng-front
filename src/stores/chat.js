@@ -45,18 +45,13 @@ export const useChatStore = defineStore(
     };
 
     const removeChat = async (chatId) => {
-      const response = await chatApi.delete(
-        "",
-        {
-          params: {
-            chatId,
-            userId: authStore.user.id,
-          },
+      const response = await chatApi.delete("", {
+        params: {
+          chatId,
+          userId: authStore.user.id,
         },
-        {
-          headers: { Authorization: `Bearer ${authStore.token}` },
-        }
-      );
+        headers: { Authorization: `Bearer ${authStore.token}` },
+      });
       getChatlist();
     };
 

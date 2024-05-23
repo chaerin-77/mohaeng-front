@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
+import authApi from "@/api/authApi";
 const authStore = useAuthStore();
 const router = useRouter();
 const user = authStore.user;
@@ -75,7 +76,6 @@ const imgList = ref([
 
 const selectImg = ref(1);
 const clickEvent = (idx) => {
-  console.log(idx, " : ", imgList.value[idx]);
   imgList.value[selectImg.value].select = false;
   imgList.value[idx].select = true;
   selectImg.value = idx;
@@ -92,11 +92,26 @@ const updateForm = ref({
 });
 
 const update = async () => {
-  console.log("img.. ", updateForm.value.img);
   if (!confirm("이대로 수정하시겠습니까?")) return;
   try {
     await authStore.update(updateForm.value);
     router.push("/");
+  } catch (error) {
+    console.error("에러:", error);
+    alert("수정 실패");
+  }
+};
+
+const deleteUser = async () => {
+  if (!confirm("정말 탈퇴하시겠습니까?")) return;
+  try {
+    await authApi.delete("", {
+      params: {
+        id: user.id,
+      },
+    });
+    authStore.logout();
+    router.push({ name: "login" });
   } catch (error) {
     console.error("에러:", error);
     alert("수정 실패");
@@ -208,6 +223,14 @@ const update = async () => {
           class="rounded-xl bg-main-color px-12 py-3 text-md font-semibold text-white shadow-md hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ring-1 ring-inset ring-gray-300"
           value="수정하기"
         />
+      </div>
+      <div class="mt-2 flex items-center justify-center gap-x-6">
+        <a
+          href="#"
+          @click.prevent="deleteUser"
+          class="text-red-500 text-sm hover:text-black hover:no-underline"
+          >회원탈퇴</a
+        >
       </div>
     </form>
   </div>

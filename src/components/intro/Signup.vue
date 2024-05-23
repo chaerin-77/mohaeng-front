@@ -75,7 +75,6 @@ const imgList = ref([
 
 const selectImg = ref(1);
 const clickEvent = (idx) => {
-  console.log(idx, " : ", imgList.value[idx]);
   imgList.value[selectImg.value].select = false;
   imgList.value[idx].select = true;
   selectImg.value = idx;

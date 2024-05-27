@@ -62,6 +62,12 @@ const deleteMemory = async (memoryId) => {
         <div class="flex justify-between">
           <div class="flex">
             <div
+              v-if="item.userId === authStore.user.id"
+              class="w-10 h-12"
+              :style="`background-image: url(${authStore.user.img}); background-size: cover; background-position: center;`"
+            ></div>
+            <div
+              v-else
               class="w-10 h-12"
               :style="`background-image: url(${item.userImg}); background-size: cover; background-position: center;`"
             ></div>

@@ -110,6 +110,7 @@ export const useAuthStore = defineStore(
           token: token.value,
         })
       );
+      user.value = localUser;
     };
 
     return { user, token, join, login, logout, update, updatePwd, addMsg };

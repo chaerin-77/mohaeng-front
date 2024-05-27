@@ -42,6 +42,7 @@ const search = async () => {
       return { ...item, visible: false };
     });
     console.log("searchList: ", searchList.value);
+    setcoord(searchList.value[0]);
   }
 };
 
